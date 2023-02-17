@@ -8,7 +8,7 @@ String RfidReader::getSerialNumber() {
 
 }
 
-uint8_t getReaderId(String serialNumber) {
+uint8_t RfidReader::getReaderId(String serialNumber) {
 
 }
 

@@ -11,14 +11,11 @@ void setup() {
   Serial.begin(115200);
   Serial.println("Initializing reader.");
   init_rfid_reader();
+  test_rfid_reader();
 
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  test_rfid_reader();
-  sleep(10);
-
 }
 
 void init_rfid_reader() {
