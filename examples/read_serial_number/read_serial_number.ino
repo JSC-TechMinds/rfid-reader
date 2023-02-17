@@ -1,8 +1,8 @@
 #include <Arduino.h>
 
-#define RE_PIN 18
 #define RO_PIN 5
 #define DI_PIN 19
+#define RE_PIN 18
 
 void init_rfid_reader();
 void test_rfid_reader();
@@ -10,6 +10,7 @@ void test_rfid_reader();
 void setup() {
   Serial.begin(115200);
   Serial.println("Initializing reader.");
+  init_rfid_reader();
 
 }
 
