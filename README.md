@@ -1,5 +1,6 @@
 # rfid-reader
 [![Arduino_CI](https://github.com/JSC-electronics/rfid-reader/actions/workflows/arduino_ci.yml/badge.svg)](https://github.com/JSC-electronics/rfid-reader/actions/workflows/arduino_ci.yml)
+[![Documentation](https://github.com/JSC-electronics/rfid-reader/actions/workflows/doxygen.yml/badge.svg)](https://github.com/JSC-electronics/rfid-reader/actions/workflows/doxygen.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache--2.0-green.svg)](https://github.com/JSC-electronics/rfid-reader/blob/main/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/JSC-electronics/rfid-reader.svg?maxAge=3600)](https://github.com/JSC-electronics/rfid-reader/releases)
 [![JSC electronics](https://img.shields.io/badge/JSC-electronics-green.svg)](https://www.jsce.cz/)
@@ -8,6 +9,10 @@
 This is an Arduino library to support one specific RS485 RFID reader. There isn't much information about this model, so we include a complete datasheet and communication protocol specifications. You can find them [here](documentation).
 
 ![image](https://user-images.githubusercontent.com/4460766/219572463-b0cf4d4c-910d-45bd-9526-941c661914de.png)
+
+## Documentation
+- [Extended Doxygen Documentation](https://jsc-electronics.github.io/rfid-reader)
+- [Examples](examples)
 
 ## License
 
