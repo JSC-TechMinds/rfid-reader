@@ -1,0 +1,28 @@
+#######################################
+# Syntax Coloring Map for rfid-reader
+#######################################
+
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+# IOnClickListener	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+# setOnClickListener	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+# RfidReader	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+# DEFAULT_DEBOUNCE_TICKS_MS	LITERAL1

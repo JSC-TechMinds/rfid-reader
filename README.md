@@ -1,4 +1,4 @@
-# rfid-reader
+# RFID reader
 [![Arduino_CI](https://github.com/JSC-electronics/rfid-reader/actions/workflows/arduino_ci.yml/badge.svg)](https://github.com/JSC-electronics/rfid-reader/actions/workflows/arduino_ci.yml)
 [![Documentation](https://github.com/JSC-electronics/rfid-reader/actions/workflows/doxygen.yml/badge.svg)](https://github.com/JSC-electronics/rfid-reader/actions/workflows/doxygen.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache--2.0-green.svg)](https://github.com/JSC-electronics/rfid-reader/blob/main/LICENSE)

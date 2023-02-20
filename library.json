@@ -1,0 +1,28 @@
+{
+  "name": "RFID reader",
+  "version": "1.0.0",
+  "keywords": "arduino, rfid, rs485",
+  "description": "This is an Arduino library to support one specific RS485 RFID reader. See README for details.",
+  "license": "Apache-2.0",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/JSC-electronics/rfid-reader"
+  },
+   "authors":
+  [
+    {
+      "name": "Vladimír Záhradník",
+      "email": "vladimir.zahradnik@jsce.cz",
+      "url": "https://github.com/vzahradnik",
+      "maintainer": true
+    },
+    {
+      "name": "JSC electronics",
+      "email": "development@jsce.cz",
+      "url": "https://github.com/jsc-electronics"
+    }
+  ],
+  "frameworks": "arduino",
+  "platforms": "*"
+}
