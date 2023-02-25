@@ -1,30 +1,63 @@
 #include "packet.h"
 
-RfidPacket::RfidPacket(uint8_t readerId, RfidPacket::Function operation, String data): readerId(readerId), operation(operation), data(data) {
+RfidPacket::RfidPacket(uint8_t readerId, RfidPacket::Function operation, String serialNumber): readerId(readerId), operation(operation), serialNumber(serialNumber) {
 
+}
+
+uint8_t RfidPacket::getReaderId() {
+    return readerId;
+}
+
+RfidPacket::Function RfidPacket::getOperation() {
+    return operation;
+}
+
+String RfidPacket::getSerialNumber() {
+    return serialNumber;
+}
+
+bool RfidPacket::isValid() {
+    bool validReaderId = readerId >= 1 && readerId <= 8;
+    bool validSerialNumber = (operation == RfidPacket::Function::SET_READER_ID ||
+                                operation == RfidPacket::Function::READ_READER_ID) ?
+                                 serialNumber.length() > 0 : true;
+
+    return validReaderId && validSerialNumber;
 }
 
 RfidPacket RfidPacket::fromWire(uint8_t * rxBuffer, uint8_t length) {
     return RfidPacket(1, RfidPacket::Function::READ_SERIAL_NUMBER);
 }
 
-uint8_t RfidPacket::toWire(uint8_t * txBuffer, uint8_t bufferSize) {
+size_t RfidPacket::toWire(uint8_t * txBuffer, uint8_t bufferSize) {
     uint8_t dataLength = 0;
-    
+
+    // Validate packet data.
+    //
+    // Note: We can't do the validation inside the constructor
+    // because Arduino doesn't support exceptions. The packet can
+    // be built with invalid data.
+    if (!isValid()) {
+        return -1;
+    }
+   
     writeHeader(txBuffer);
 
-    // Append data
-    // Data is used only in two operations. Ignore the data otherwise.
+    // Include data field.
+    // Data field is an optional field with variable length.
+    // It consists of a reader serial number, sometimes appended by the reader ID
+    // (both in ASCII).
     if (operation == RfidPacket::Function::SET_READER_ID ||
         operation == RfidPacket::Function::READ_READER_ID) {
+            String data = serialNumber;
+
+            // Append reader ID to data field
+            if (operation == RfidPacket::Function::SET_READER_ID) {
+                data += String(readerId);
+            }
+
             dataLength = data.length();
             data.getBytes(txBuffer + HEADER_SIZE, bufferSize - HEADER_SIZE, 0);
-
-            // Append reader ID to data
-            if (operation == RfidPacket::Function::SET_READER_ID) {
-                itoa(readerId, (char *) (txBuffer + HEADER_SIZE + dataLength), 10);
-                dataLength += 1;
-            }
     }
 
     writeFooter(txBuffer, dataLength);

@@ -13,17 +13,26 @@ class RfidPacket {
             READ_SERIAL_NUMBER = 'B',
             SET_READER_ID = 'C',
             READ_READER_ID = 'D',
-            READ_CARD_CODE_DATA = 'F',
-            RE_READ_CARD = 'G'
+            READ_CARD_DATA = 'F',
+            RE_READ_CARD_DATA = 'G'
         };
 
+        // Not all operations require reader ID or serial number
         explicit RfidPacket(
             uint8_t readerId,
             RfidPacket::Function operation,
-            String data = "");
+            String serialNumber = "");
+
+        uint8_t getReaderId();
+
+        RfidPacket::Function getOperation();
+
+        String getSerialNumber();
+
+        bool isValid();
 
         static RfidPacket fromWire(uint8_t * rxBuffer, uint8_t length);
-        uint8_t toWire(uint8_t * txBuffer, uint8_t bufferSize);
+        size_t toWire(uint8_t * txBuffer, uint8_t bufferSize);
 
     private:
         // Packet-specific control characters
@@ -49,7 +58,7 @@ class RfidPacket {
 
         uint8_t readerId;
         RfidPacket::Function operation;
-        String data;
+        String serialNumber;
 
 };
 
