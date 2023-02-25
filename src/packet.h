@@ -1,5 +1,5 @@
-#ifndef RFID_PROTOCOL_H
-#define RFID_PROTOCOL_H
+#ifndef RFID_PACKET_H
+#define RFID_PACKET_H
 
 #include <Arduino.h>
 
@@ -18,17 +18,25 @@ class RfidPacket {
         };
 
         explicit RfidPacket(
-            uint8_t reader_id,
+            uint8_t readerId,
             RfidPacket::Function operation,
-            /* Optional; it depends on operation. */
-            byte data [] = nullptr);
+            String data = "");
+
+        static RfidPacket fromWire(uint8_t * rxBuffer, uint8_t length);
+        uint8_t toWire(uint8_t * txBuffer);
 
     private:
         // Packet-specific control characters
         static constexpr const uint8_t SOH = 0x09; // Start of heading
         static constexpr const uint8_t END = 0x0D; // End
 
+        uint8_t xorChecksum(uint8_t * array, uint8_t length);
+
+        uint8_t readerId;
+        RfidPacket::Function operation;
+        String data;
+
 };
 
 
-#endif // RFID_PROTOCOL_H
+#endif // RFID_PACKET_H

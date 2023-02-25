@@ -6,3 +6,9 @@
 .vscode/
 .idea/
 cmake*
+*.tar.gz
+
+# arduino_ci unit test binaries and artifacts
+.arduino_ci
+*.bin
+*.bin.dSYM

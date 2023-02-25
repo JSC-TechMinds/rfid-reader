@@ -3,6 +3,10 @@
 
 #include <Arduino.h>
 
+#ifndef RS485_BUFFER_SIZE
+#define RS485_BUFFER_SIZE 64
+#endif
+
 class RfidReader {
     public:
         explicit RfidReader();
@@ -59,6 +63,8 @@ class RfidReader {
         String reReadCardData(uint8_t reader_id);
 
     private:
+        uint8_t rxBuffer[RS485_BUFFER_SIZE];
+        uint8_t txBuffer[RS485_BUFFER_SIZE];
 };
 
 #endif // RS485_RFID_READER_H
