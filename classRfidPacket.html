@@ -118,8 +118,8 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a708b9f9da35c008d062b9593f26e3f05"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a708b9f9da35c008d062b9593f26e3f05">RfidPacket</a> (uint8_t readerId, RfidPacket::Function operation, String data=&quot;&quot;)</td></tr>
 <tr class="separator:a708b9f9da35c008d062b9593f26e3f05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af05a97240f98640e10093fcfee11b244"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#af05a97240f98640e10093fcfee11b244">toWire</a> (uint8_t *txBuffer)</td></tr>
-<tr class="separator:af05a97240f98640e10093fcfee11b244"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a366350d8ae261858a832930393caa478"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a366350d8ae261858a832930393caa478">toWire</a> (uint8_t *txBuffer, uint8_t bufferSize)</td></tr>
+<tr class="separator:a366350d8ae261858a832930393caa478"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -262,8 +262,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="af05a97240f98640e10093fcfee11b244" name="af05a97240f98640e10093fcfee11b244"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af05a97240f98640e10093fcfee11b244">&#9670;&#160;</a></span>toWire()</h2>
+<a id="a366350d8ae261858a832930393caa478" name="a366350d8ae261858a832930393caa478"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a366350d8ae261858a832930393caa478">&#9670;&#160;</a></span>toWire()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -272,8 +272,18 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">uint8_t RfidPacket::toWire </td>
           <td>(</td>
           <td class="paramtype">uint8_t *&#160;</td>
-          <td class="paramname"><em>txBuffer</em></td><td>)</td>
+          <td class="paramname"><em>txBuffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>bufferSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
