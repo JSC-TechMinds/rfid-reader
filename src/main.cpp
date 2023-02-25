@@ -7,7 +7,7 @@ void setup() {
     uint8_t length;
     RfidPacket packet = RfidPacket(1, RfidPacket::Function::READ_SERIAL_NUMBER);
 
-    length = packet.toWire(buffer);
+    length = packet.toWire(buffer, 64);
 }
 
 void loop() {

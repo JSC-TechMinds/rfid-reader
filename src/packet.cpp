@@ -8,13 +8,27 @@ RfidPacket RfidPacket::fromWire(uint8_t * rxBuffer, uint8_t length) {
     return RfidPacket(1, RfidPacket::Function::READ_SERIAL_NUMBER);
 }
 
-uint8_t RfidPacket::toWire(uint8_t * txBuffer) {
+uint8_t RfidPacket::toWire(uint8_t * txBuffer, uint8_t bufferSize) {
+    uint8_t dataLength = 0;
+    
     writeHeader(txBuffer);
 
     // Append data
+    // Data is used only in two operations. Ignore the data otherwise.
+    if (operation == RfidPacket::Function::SET_READER_ID ||
+        operation == RfidPacket::Function::READ_READER_ID) {
+            dataLength = data.length();
+            data.getBytes(txBuffer + HEADER_SIZE, bufferSize - HEADER_SIZE, 0);
 
-    writeFooter(txBuffer);
-    return calculatePacketSize();
+            // Append reader ID to data
+            if (operation == RfidPacket::Function::SET_READER_ID) {
+                itoa(readerId, (char *) (txBuffer + HEADER_SIZE + dataLength), 10);
+                dataLength += 1;
+            }
+    }
+
+    writeFooter(txBuffer, dataLength);
+    return calculatePacketSize(dataLength);
 }
 
 void RfidPacket::writeHeader(uint8_t * buffer) {
@@ -23,7 +37,7 @@ void RfidPacket::writeHeader(uint8_t * buffer) {
 
     if (operation == RfidPacket::Function::SET_READER_ID ||
         operation == RfidPacket::Function::READ_READER_ID) {           
-        buffer[2] = READER_ID_PLACEHOLDER;
+            buffer[2] = READER_ID_PLACEHOLDER;
     } else {
         itoa(readerId, (char *) (buffer + 2), 10);
     }

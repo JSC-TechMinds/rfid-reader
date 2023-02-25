@@ -23,7 +23,7 @@ class RfidPacket {
             String data = "");
 
         static RfidPacket fromWire(uint8_t * rxBuffer, uint8_t length);
-        uint8_t toWire(uint8_t * txBuffer);
+        uint8_t toWire(uint8_t * txBuffer, uint8_t bufferSize);
 
     private:
         // Packet-specific control characters
