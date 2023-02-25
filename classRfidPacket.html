@@ -92,6 +92,7 @@ $(document).ready(function(){initNavTree('classRfidPacket.html',''); initResizab
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classRfidPacket-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">RfidPacket Class Reference</div></div>
 </div><!--header-->
@@ -115,13 +116,19 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acac79db196cc311dc50e038325e9e0fe"><td class="memItemLeft" align="right" valign="top"><a id="acac79db196cc311dc50e038325e9e0fe" name="acac79db196cc311dc50e038325e9e0fe"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>RfidPacket</b> (uint8_t reader_id, RfidPacket::Function operation, byte data[]=nullptr)</td></tr>
-<tr class="separator:acac79db196cc311dc50e038325e9e0fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a708b9f9da35c008d062b9593f26e3f05"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a708b9f9da35c008d062b9593f26e3f05">RfidPacket</a> (uint8_t readerId, RfidPacket::Function operation, String data=&quot;&quot;)</td></tr>
+<tr class="separator:a708b9f9da35c008d062b9593f26e3f05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af05a97240f98640e10093fcfee11b244"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#af05a97240f98640e10093fcfee11b244">toWire</a> (uint8_t *txBuffer)</td></tr>
+<tr class="separator:af05a97240f98640e10093fcfee11b244"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a347a867359807fe0ea79e99672dc5331"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classRfidPacket.html">RfidPacket</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a347a867359807fe0ea79e99672dc5331">fromWire</a> (uint8_t *rxBuffer, uint8_t length)</td></tr>
+<tr class="separator:a347a867359807fe0ea79e99672dc5331"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="protocol_8h_source.html#l00006">6</a> of file <a class="el" href="protocol_8h_source.html">protocol.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00006">6</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="acb4fda791955e46896efc4425ff19bc9" name="acb4fda791955e46896efc4425ff19bc9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acb4fda791955e46896efc4425ff19bc9">&#9670;&#160;</a></span>Function</h2>
@@ -143,7 +150,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="protocol_8h_source.html#l00012">12</a> of file <a class="el" href="protocol_8h_source.html">protocol.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00012">12</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
 
 </div>
 </div>
@@ -167,12 +174,117 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="protocol_8h_source.html#l00008">8</a> of file <a class="el" href="protocol_8h_source.html">protocol.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00008">8</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/<a class="el" href="protocol_8h_source.html">protocol.h</a></li>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a708b9f9da35c008d062b9593f26e3f05" name="a708b9f9da35c008d062b9593f26e3f05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a708b9f9da35c008d062b9593f26e3f05">&#9670;&#160;</a></span>RfidPacket()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RfidPacket::RfidPacket </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>readerId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RfidPacket::Function&#160;</td>
+          <td class="paramname"><em>operation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>data</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00003">3</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a347a867359807fe0ea79e99672dc5331" name="a347a867359807fe0ea79e99672dc5331"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a347a867359807fe0ea79e99672dc5331">&#9670;&#160;</a></span>fromWire()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRfidPacket.html">RfidPacket</a> RfidPacket::fromWire </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>rxBuffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>length</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00007">7</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
+
+</div>
+</div>
+<a id="af05a97240f98640e10093fcfee11b244" name="af05a97240f98640e10093fcfee11b244"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af05a97240f98640e10093fcfee11b244">&#9670;&#160;</a></span>toWire()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t RfidPacket::toWire </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>txBuffer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00011">11</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>src/<a class="el" href="packet_8h_source.html">packet.h</a></li>
+<li>src/<a class="el" href="packet_8cpp_source.html">packet.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

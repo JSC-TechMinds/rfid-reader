@@ -1,7 +1,7 @@
 var NAVTREEINDEX0 =
 {
-"RfidReader_8cpp_source.html":[2,0,0,2],
-"RfidReader_8h_source.html":[2,0,0,3],
+"RfidReader_8cpp_source.html":[2,0,0,3],
+"RfidReader_8h_source.html":[2,0,0,4],
 "annotated.html":[1,0],
 "classRfidPacket.html":[1,0,0],
 "classRfidReader.html":[1,0,1],
@@ -18,6 +18,7 @@ var NAVTREEINDEX0 =
 "index.html":[],
 "main_8cpp_source.html":[2,0,0,0],
 "md_examples_README.html":[0],
-"pages.html":[],
-"protocol_8h_source.html":[2,0,0,1]
+"packet_8cpp_source.html":[2,0,0,1],
+"packet_8h_source.html":[2,0,0,2],
+"pages.html":[]
 };
