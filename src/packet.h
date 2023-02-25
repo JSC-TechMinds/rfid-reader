@@ -30,7 +30,22 @@ class RfidPacket {
         static constexpr const uint8_t SOH = 0x09; // Start of heading
         static constexpr const uint8_t END = 0x0D; // End
 
-        uint8_t xorChecksum(uint8_t * array, uint8_t length);
+        static constexpr const uint8_t HEADER_SIZE = 4; // 4 bytes
+        static constexpr const uint8_t FOOTER_SIZE = 3; // 3 bytes
+        static constexpr const uint8_t BCC_SIZE = 2; // 2 bytes for checksum
+
+        // This value is used instead of actual reader ID when user
+        // wants to set the reader ID or read it back.
+        // The desired reader ID is appended as a last byte to the data payload.
+        static constexpr const uint8_t READER_ID_PLACEHOLDER = 'X';
+
+        uint8_t xorChecksum(uint8_t * buffer, uint8_t length);
+
+        void writeHeader(uint8_t * buffer);
+
+        void writeFooter(uint8_t * buffer, uint8_t dataLength = 0);
+
+        uint8_t calculatePacketSize(uint8_t dataLength = 0);
 
         uint8_t readerId;
         RfidPacket::Function operation;
