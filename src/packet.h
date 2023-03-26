@@ -82,13 +82,16 @@ class RfidResponse: public RfidPacket {
         bool isValid() override;
 
     private:
-        // Used for wire de-serialization. Called by fromWire(...).
-        explicit RfidResponse(uint8_t * rxBuffer, uint8_t length);
+        // Not all operations require reader ID or serial number
+        explicit RfidResponse(
+            uint8_t readerId,
+            RfidPacket::Function operation,
+            String serialNumber = "");
 
         // Packet-specific control characters
         static constexpr const uint8_t SOH = 0x0A; // Start of heading
 
-        bool isValidPacket = false;
+        bool isValidPacket;
 };
 
 #endif // RFID_PACKET_H

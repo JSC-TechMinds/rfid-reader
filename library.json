@@ -23,6 +23,18 @@
       "url": "https://github.com/jsc-electronics"
     }
   ],
+  "dependencies": [
+    {
+      "name": "Wire",
+      "frameworks": "arduino"
+    },
+    {
+      "name": "ArduinoLog"
+    },
+    {
+      "name": "TaskManagerIO"
+    }
+  ],
   "frameworks": "arduino",
   "platforms": "*"
 }

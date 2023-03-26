@@ -102,6 +102,14 @@ uint8_t RfidRequest::calculatePacketSize(uint8_t dataLength) {
     return HEADER_SIZE + dataLength + FOOTER_SIZE;
 }
 
+RfidResponse::RfidResponse(uint8_t readerId, RfidPacket::Function operation, String serialNumber): RfidPacket(readerId, operation, serialNumber) {
+    isValidPacket = false;
+}
+
 bool RfidResponse::isValid() {
     return isValidPacket;
+}
+
+RfidResponse RfidResponse::fromWire(uint8_t * rxBuffer, uint8_t length) {
+    return RfidResponse(1, RfidPacket::Function::SET_READER_ID, "");
 }
