@@ -99,66 +99,96 @@ $(document).ready(function(){initNavTree('packet_8h_source.html',''); initResiza
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="classRfidPacket.html">    6</a></span><span class="keyword">class </span><a class="code hl_class" href="classRfidPacket.html">RfidPacket</a> {</div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>        <span class="keyword">enum class</span> Type : uint8_t {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>            NUMBER = <span class="charliteral">&#39;A&#39;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>        };</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>        <span class="keyword">enum class</span> Function : uint8_t {</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>            READ_SERIAL_NUMBER = <span class="charliteral">&#39;B&#39;</span>,</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>            SET_READER_ID = <span class="charliteral">&#39;C&#39;</span>,</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>            READ_READER_ID = <span class="charliteral">&#39;D&#39;</span>,</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>            READ_CARD_DATA = <span class="charliteral">&#39;F&#39;</span>,</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>            RE_READ_CARD_DATA = <span class="charliteral">&#39;G&#39;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        };</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classRfidPacket.html">~RfidPacket</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>        <span class="keyword">enum class</span> Function : uint8_t {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>            READ_SERIAL_NUMBER = <span class="charliteral">&#39;B&#39;</span>,</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>            SET_READER_ID = <span class="charliteral">&#39;C&#39;</span>,</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>            READ_READER_ID = <span class="charliteral">&#39;D&#39;</span>,</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>            READ_CARD_DATA = <span class="charliteral">&#39;F&#39;</span>,</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>            RE_READ_CARD_DATA = <span class="charliteral">&#39;G&#39;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        };</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        uint8_t getReaderId();</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="comment">// Not all operations require reader ID or serial number</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keyword">explicit</span> <a class="code hl_class" href="classRfidPacket.html">RfidPacket</a>(</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            uint8_t readerId,</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            RfidPacket::Function operation,</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            String serialNumber = <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        RfidPacket::Function getOperation();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        String getSerialNumber();</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> isValid() = 0;</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        uint8_t getReaderId();</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        RfidPacket::Function getOperation();</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        String getSerialNumber();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keyword">explicit</span> <a class="code hl_class" href="classRfidPacket.html">RfidPacket</a>(</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            uint8_t readerId,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            RfidPacket::Function operation,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            String serialNumber = <span class="stringliteral">&quot;&quot;</span>);</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keywordtype">bool</span> isValid();</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keyword">static</span> <a class="code hl_class" href="classRfidPacket.html">RfidPacket</a> fromWire(uint8_t * rxBuffer, uint8_t length);</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordtype">size_t</span> toWire(uint8_t * txBuffer, uint8_t bufferSize);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keyword">enum class</span> Type : uint8_t {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            NUMBER = <span class="charliteral">&#39;A&#39;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        };</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        uint8_t xorChecksum(uint8_t * buffer, uint8_t length);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="comment">// Packet-specific control characters</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> uint8_t SOH = 0x09; <span class="comment">// Start of heading</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> uint8_t END = 0x0D; <span class="comment">// End</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> uint8_t HEADER_SIZE = 4; <span class="comment">// 4 bytes</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> uint8_t FOOTER_SIZE = 3; <span class="comment">// 3 bytes</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> uint8_t BCC_SIZE = 2; <span class="comment">// 2 bytes for checksum</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> uint8_t END = 0x0D; <span class="comment">// End</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="comment">// This value is used instead of actual reader ID when user</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="comment">// wants to set the reader ID or read it back.</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="comment">// The desired reader ID is appended as a last byte to the data payload.</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> uint8_t READER_ID_PLACEHOLDER = <span class="charliteral">&#39;X&#39;</span>;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="comment">// This value is used instead of actual reader ID when user</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="comment">// wants to set the reader ID or read it back.</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="comment">// The desired reader ID is appended as a last byte to the data payload.</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> uint8_t READER_ID_PLACEHOLDER = <span class="charliteral">&#39;X&#39;</span>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        uint8_t readerId;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        RfidPacket::Function operation;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        String serialNumber;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>};</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        uint8_t xorChecksum(uint8_t * buffer, uint8_t length);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordtype">void</span> writeHeader(uint8_t * buffer);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordtype">void</span> writeFooter(uint8_t * buffer, uint8_t dataLength = 0);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        uint8_t calculatePacketSize(uint8_t dataLength = 0);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classRfidRequest.html">   51</a></span><span class="keyword">class </span><a class="code hl_class" href="classRfidRequest.html">RfidRequest</a>: <span class="keyword">public</span> <a class="code hl_class" href="classRfidPacket.html">RfidPacket</a> {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="comment">// Not all operations require reader ID or serial number</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keyword">explicit</span> <a class="code hl_class" href="classRfidRequest.html">RfidRequest</a>(</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            uint8_t readerId,</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            RfidPacket::Function operation,</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            String serialNumber = <span class="stringliteral">&quot;&quot;</span>);</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        uint8_t readerId;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        RfidPacket::Function operation;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        String serialNumber;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordtype">size_t</span> toWire(uint8_t * txBuffer, uint8_t bufferSize);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordtype">bool</span> isValid() <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>};</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">#endif </span><span class="comment">// RFID_PACKET_H</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="comment">// Packet-specific control characters</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> uint8_t SOH = 0x09; <span class="comment">// Start of heading</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordtype">void</span> writeHeader(uint8_t * buffer);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordtype">void</span> writeFooter(uint8_t * buffer, uint8_t dataLength = 0);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        uint8_t calculatePacketSize(uint8_t dataLength = 0);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> uint8_t HEADER_SIZE = 4; <span class="comment">// 4 bytes</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> uint8_t FOOTER_SIZE = 3; <span class="comment">// 3 bytes</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> uint8_t BCC_SIZE = 2; <span class="comment">// 2 bytes for checksum</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>};</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="classRfidResponse.html">   78</a></span><span class="keyword">class </span><a class="code hl_class" href="classRfidResponse.html">RfidResponse</a>: <span class="keyword">public</span> <a class="code hl_class" href="classRfidPacket.html">RfidPacket</a> {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keyword">static</span> <a class="code hl_class" href="classRfidResponse.html">RfidResponse</a> fromWire(uint8_t * rxBuffer, uint8_t length);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordtype">bool</span> isValid() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="comment">// Used for wire de-serialization. Called by fromWire(...).</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keyword">explicit</span> <a class="code hl_class" href="classRfidResponse.html">RfidResponse</a>(uint8_t * rxBuffer, uint8_t length);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="comment">// Packet-specific control characters</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> uint8_t SOH = 0x0A; <span class="comment">// Start of heading</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="keywordtype">bool</span> isValidPacket = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>};</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#endif </span><span class="comment">// RFID_PACKET_H</span></div>
 <div class="ttc" id="aclassRfidPacket_html"><div class="ttname"><a href="classRfidPacket.html">RfidPacket</a></div><div class="ttdef"><b>Definition:</b> <a href="packet_8h_source.html#l00006">packet.h:6</a></div></div>
+<div class="ttc" id="aclassRfidRequest_html"><div class="ttname"><a href="classRfidRequest.html">RfidRequest</a></div><div class="ttdef"><b>Definition:</b> <a href="packet_8h_source.html#l00051">packet.h:51</a></div></div>
+<div class="ttc" id="aclassRfidResponse_html"><div class="ttname"><a href="classRfidResponse.html">RfidResponse</a></div><div class="ttdef"><b>Definition:</b> <a href="packet_8h_source.html#l00078">packet.h:78</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
