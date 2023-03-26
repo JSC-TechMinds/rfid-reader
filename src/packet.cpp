@@ -1,7 +1,6 @@
 #include "packet.h"
 
 RfidPacket::RfidPacket(uint8_t readerId, RfidPacket::Function operation, String serialNumber): readerId(readerId), operation(operation), serialNumber(serialNumber) {
-
 }
 
 uint8_t RfidPacket::getReaderId() {
@@ -16,7 +15,20 @@ String RfidPacket::getSerialNumber() {
     return serialNumber;
 }
 
-bool RfidPacket::isValid() {
+uint8_t RfidPacket::xorChecksum(uint8_t * buffer, uint8_t length) {
+    uint8_t checkSum = 0;
+
+    for (int i = 0; i < length; i++) {
+        checkSum ^= buffer[i];
+    }
+
+    return checkSum;
+}
+
+RfidRequest::RfidRequest(uint8_t readerId, RfidPacket::Function operation, String serialNumber): RfidPacket(readerId, operation, serialNumber) {
+}
+
+bool RfidRequest::isValid() {
     bool validReaderId = readerId >= 1 && readerId <= 8;
     bool validSerialNumber = (operation == RfidPacket::Function::SET_READER_ID ||
                                 operation == RfidPacket::Function::READ_READER_ID) ?
@@ -25,11 +37,7 @@ bool RfidPacket::isValid() {
     return validReaderId && validSerialNumber;
 }
 
-RfidPacket RfidPacket::fromWire(uint8_t * rxBuffer, uint8_t length) {
-    return RfidPacket(1, RfidPacket::Function::READ_SERIAL_NUMBER);
-}
-
-size_t RfidPacket::toWire(uint8_t * txBuffer, uint8_t bufferSize) {
+size_t RfidRequest::toWire(uint8_t * txBuffer, uint8_t bufferSize) {
     uint8_t dataLength = 0;
 
     // Validate packet data.
@@ -64,8 +72,8 @@ size_t RfidPacket::toWire(uint8_t * txBuffer, uint8_t bufferSize) {
     return calculatePacketSize(dataLength);
 }
 
-void RfidPacket::writeHeader(uint8_t * buffer) {
-    buffer[0] = RfidPacket::SOH;
+void RfidRequest::writeHeader(uint8_t * buffer) {
+    buffer[0] = RfidRequest::SOH;
     buffer[1] = uint8_t(RfidPacket::Type::NUMBER);
 
     if (operation == RfidPacket::Function::SET_READER_ID ||
@@ -78,7 +86,7 @@ void RfidPacket::writeHeader(uint8_t * buffer) {
     buffer[3] = uint8_t(operation);
 }
 
-void RfidPacket::writeFooter(uint8_t * buffer, uint8_t dataLength) {
+void RfidRequest::writeFooter(uint8_t * buffer, uint8_t dataLength) {
     // BCC checksum
     // Note: Resulting checksum is converted into two ASCII characters.
     // For example: 0x3B is converted into '3', 'B'.
@@ -90,16 +98,10 @@ void RfidPacket::writeFooter(uint8_t * buffer, uint8_t dataLength) {
     buffer[payloadLength + BCC_SIZE] = RfidPacket::END;
 }
 
-uint8_t RfidPacket::calculatePacketSize(uint8_t dataLength) {
+uint8_t RfidRequest::calculatePacketSize(uint8_t dataLength) {
     return HEADER_SIZE + dataLength + FOOTER_SIZE;
 }
 
-uint8_t RfidPacket::xorChecksum(uint8_t * buffer, uint8_t length) {
-    uint8_t checkSum = 0;
-
-    for (int i = 0; i < length; i++) {
-        checkSum ^= buffer[i];
-    }
-
-    return checkSum;
+bool RfidResponse::isValid() {
+    return isValidPacket;
 }

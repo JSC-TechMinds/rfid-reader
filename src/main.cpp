@@ -5,9 +5,9 @@ void setup() {
     Serial.begin(115200);
     uint8_t buffer[64];
     uint8_t length;
-    RfidPacket packet = RfidPacket(1, RfidPacket::Function::READ_SERIAL_NUMBER);
+    RfidRequest request = RfidRequest(1, RfidPacket::Function::READ_SERIAL_NUMBER);
 
-    length = packet.toWire(buffer, 64);
+    length = request.toWire(buffer, 64);
 }
 
 void loop() {
