@@ -107,22 +107,19 @@ Inheritance diagram for RfidRequest:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3a4c3ba5bf10d5a15abfb350fb867077"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidRequest.html#a3a4c3ba5bf10d5a15abfb350fb867077">RfidRequest</a> (uint8_t readerId, RfidPacket::Function operation, String serialNumber=&quot;&quot;)</td></tr>
-<tr class="separator:a3a4c3ba5bf10d5a15abfb350fb867077"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d455279a8c56c1003472e28ec93779b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidRequest.html#a7d455279a8c56c1003472e28ec93779b">RfidRequest</a> (uint8_t readerId, RfidPacket::Function operation, const char *serialNumber=&quot;&quot;)</td></tr>
+<tr class="separator:a7d455279a8c56c1003472e28ec93779b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6701eabe13313a6f5e76eb3a28b8e76c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidRequest.html#a6701eabe13313a6f5e76eb3a28b8e76c">toWire</a> (uint8_t *txBuffer, uint8_t bufferSize)</td></tr>
 <tr class="separator:a6701eabe13313a6f5e76eb3a28b8e76c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80a7c00e3ba359cacd1726f3d5495699"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidRequest.html#a80a7c00e3ba359cacd1726f3d5495699">isValid</a> () override</td></tr>
-<tr class="separator:a80a7c00e3ba359cacd1726f3d5495699"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classRfidPacket"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classRfidPacket')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classRfidPacket.html">RfidPacket</a></td></tr>
 <tr class="memitem:a197e5e5dc47a2ca2c93cd70b7d7480c3 inherit pub_methods_classRfidPacket"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a197e5e5dc47a2ca2c93cd70b7d7480c3">getReaderId</a> ()</td></tr>
 <tr class="separator:a197e5e5dc47a2ca2c93cd70b7d7480c3 inherit pub_methods_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4889d7f97786db08c0580f5211fa99ed inherit pub_methods_classRfidPacket"><td class="memItemLeft" align="right" valign="top">RfidPacket::Function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a4889d7f97786db08c0580f5211fa99ed">getOperation</a> ()</td></tr>
 <tr class="separator:a4889d7f97786db08c0580f5211fa99ed inherit pub_methods_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac48572f5cc316ef1042101bd3456cb85 inherit pub_methods_classRfidPacket"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#ac48572f5cc316ef1042101bd3456cb85">getSerialNumber</a> ()</td></tr>
-<tr class="separator:ac48572f5cc316ef1042101bd3456cb85 inherit pub_methods_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aedbe5df3cc47ca60762f6f5560756aae inherit pub_methods_classRfidPacket"><td class="memItemLeft" align="right" valign="top"><a id="aedbe5df3cc47ca60762f6f5560756aae" name="aedbe5df3cc47ca60762f6f5560756aae"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>isValid</b> ()=0</td></tr>
-<tr class="separator:aedbe5df3cc47ca60762f6f5560756aae inherit pub_methods_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd5980d540b9029db93515332c1d0907 inherit pub_methods_classRfidPacket"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#abd5980d540b9029db93515332c1d0907">getSerialNumber</a> ()</td></tr>
+<tr class="separator:abd5980d540b9029db93515332c1d0907 inherit pub_methods_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab6c8deb24ab0790143c6d91c730ec8d inherit pub_methods_classRfidPacket"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#aab6c8deb24ab0790143c6d91c730ec8d">isValid</a> ()</td></tr>
+<tr class="separator:aab6c8deb24ab0790143c6d91c730ec8d inherit pub_methods_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -142,29 +139,44 @@ Additional Inherited Members</h2></td></tr>
  }</td></tr>
 <tr class="separator:a1f46f654e99a961414e0302e7c1b3287 inherit pro_types_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classRfidPacket"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classRfidPacket')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classRfidPacket.html">RfidPacket</a></td></tr>
-<tr class="memitem:a64b10f7e1533b796d4b112de392fad3c inherit pro_methods_classRfidPacket"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a64b10f7e1533b796d4b112de392fad3c">RfidPacket</a> (uint8_t readerId, RfidPacket::Function operation, String serialNumber=&quot;&quot;)</td></tr>
-<tr class="separator:a64b10f7e1533b796d4b112de392fad3c inherit pro_methods_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6543c1162b26562fbd019b026ab18b86 inherit pro_methods_classRfidPacket"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a6543c1162b26562fbd019b026ab18b86">xorChecksum</a> (uint8_t *buffer, uint8_t length)</td></tr>
-<tr class="separator:a6543c1162b26562fbd019b026ab18b86 inherit pro_methods_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1092d5f121d404942ac52898d67cf163 inherit pro_methods_classRfidPacket"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a1092d5f121d404942ac52898d67cf163">RfidPacket</a> (uint8_t readerId, RfidPacket::Function operation, const char *serialNumber=&quot;&quot;)</td></tr>
+<tr class="separator:a1092d5f121d404942ac52898d67cf163 inherit pro_methods_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_static_methods_classRfidPacket"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_classRfidPacket')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="classRfidPacket.html">RfidPacket</a></td></tr>
+<tr class="memitem:a6543c1162b26562fbd019b026ab18b86 inherit pro_static_methods_classRfidPacket"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a6543c1162b26562fbd019b026ab18b86">xorChecksum</a> (uint8_t *buffer, uint8_t length)</td></tr>
+<tr class="separator:a6543c1162b26562fbd019b026ab18b86 inherit pro_static_methods_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classRfidPacket"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classRfidPacket')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classRfidPacket.html">RfidPacket</a></td></tr>
 <tr class="memitem:aece26e52d99ff052fd15425b8bab1b04 inherit pro_attribs_classRfidPacket"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#aece26e52d99ff052fd15425b8bab1b04">readerId</a></td></tr>
 <tr class="separator:aece26e52d99ff052fd15425b8bab1b04 inherit pro_attribs_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d3121879d053a257d908406deacc6ab inherit pro_attribs_classRfidPacket"><td class="memItemLeft" align="right" valign="top">RfidPacket::Function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a5d3121879d053a257d908406deacc6ab">operation</a></td></tr>
 <tr class="separator:a5d3121879d053a257d908406deacc6ab inherit pro_attribs_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8eb02a8bd45ff87e1997857c5ac790d inherit pro_attribs_classRfidPacket"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#ac8eb02a8bd45ff87e1997857c5ac790d">serialNumber</a></td></tr>
-<tr class="separator:ac8eb02a8bd45ff87e1997857c5ac790d inherit pro_attribs_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a822a2f8f2753bec9b07f10d8b981ebd4 inherit pro_attribs_classRfidPacket"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a822a2f8f2753bec9b07f10d8b981ebd4">serialNumberBuffer</a> [SERIAL_NUMBER_LEN+1]</td></tr>
+<tr class="separator:a822a2f8f2753bec9b07f10d8b981ebd4 inherit pro_attribs_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1950de3723f4dc20f8ac4a49a124b1d1 inherit pro_attribs_classRfidPacket"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a1950de3723f4dc20f8ac4a49a124b1d1">isValidPacket</a></td></tr>
+<tr class="separator:a1950de3723f4dc20f8ac4a49a124b1d1 inherit pro_attribs_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_attribs_classRfidPacket"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classRfidPacket')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classRfidPacket.html">RfidPacket</a></td></tr>
 <tr class="memitem:a483c4cb7d09331163c50e35bb8bb0282 inherit pro_static_attribs_classRfidPacket"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a483c4cb7d09331163c50e35bb8bb0282">END</a> = 0x0D</td></tr>
 <tr class="separator:a483c4cb7d09331163c50e35bb8bb0282 inherit pro_static_attribs_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6efb5cf84351e58563c76525cd0eb57 inherit pro_static_attribs_classRfidPacket"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#af6efb5cf84351e58563c76525cd0eb57">READER_ID_LEN</a> = 1</td></tr>
+<tr class="separator:af6efb5cf84351e58563c76525cd0eb57 inherit pro_static_attribs_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a1cc042e158d419726e8dcf519ce1b5 inherit pro_static_attribs_classRfidPacket"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a3a1cc042e158d419726e8dcf519ce1b5">READER_ID_PLACEHOLDER</a> = 'X'</td></tr>
 <tr class="separator:a3a1cc042e158d419726e8dcf519ce1b5 inherit pro_static_attribs_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a643b84f5c23bff08fb12b79c84b6dd41 inherit pro_static_attribs_classRfidPacket"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a643b84f5c23bff08fb12b79c84b6dd41">HEADER_SIZE</a> = 4</td></tr>
+<tr class="separator:a643b84f5c23bff08fb12b79c84b6dd41 inherit pro_static_attribs_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81eb2d98a31d8f988cb100d0f75e7716 inherit pro_static_attribs_classRfidPacket"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a81eb2d98a31d8f988cb100d0f75e7716">FOOTER_SIZE</a> = 3</td></tr>
+<tr class="separator:a81eb2d98a31d8f988cb100d0f75e7716 inherit pro_static_attribs_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1affde0f19981432857c22de9753add inherit pro_static_attribs_classRfidPacket"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#aa1affde0f19981432857c22de9753add">BCC_SIZE</a> = 2</td></tr>
+<tr class="separator:aa1affde0f19981432857c22de9753add inherit pro_static_attribs_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdb2cb8367441984e4c414270e5e0668 inherit pro_static_attribs_classRfidPacket"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#acdb2cb8367441984e4c414270e5e0668">SERIAL_NUMBER_LEN</a> = 8</td></tr>
+<tr class="separator:acdb2cb8367441984e4c414270e5e0668 inherit pro_static_attribs_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace6c3682b389c33753cc2ef620f8d4d7 inherit pro_static_attribs_classRfidPacket"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#ace6c3682b389c33753cc2ef620f8d4d7">MAX_DATA_PAYLOAD_SIZE</a> = SERIAL_NUMBER_LEN + READER_ID_LEN + 1</td></tr>
+<tr class="separator:ace6c3682b389c33753cc2ef620f8d4d7 inherit pro_static_attribs_classRfidPacket"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00051">51</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00071">71</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a3a4c3ba5bf10d5a15abfb350fb867077" name="a3a4c3ba5bf10d5a15abfb350fb867077"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a4c3ba5bf10d5a15abfb350fb867077">&#9670;&#160;</a></span>RfidRequest()</h2>
+<a id="a7d455279a8c56c1003472e28ec93779b" name="a7d455279a8c56c1003472e28ec93779b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d455279a8c56c1003472e28ec93779b">&#9670;&#160;</a></span>RfidRequest()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -187,7 +199,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">String&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>serialNumber</em> = <code>&quot;&quot;</code>&#160;</td>
         </tr>
         <tr>
@@ -203,40 +215,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00028">28</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00037">37</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a80a7c00e3ba359cacd1726f3d5495699" name="a80a7c00e3ba359cacd1726f3d5495699"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80a7c00e3ba359cacd1726f3d5495699">&#9670;&#160;</a></span>isValid()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool RfidRequest::isValid </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="classRfidPacket.html">RfidPacket</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00031">31</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
-
-</div>
-</div>
 <a id="a6701eabe13313a6f5e76eb3a28b8e76c" name="a6701eabe13313a6f5e76eb3a28b8e76c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6701eabe13313a6f5e76eb3a28b8e76c">&#9670;&#160;</a></span>toWire()</h2>
 
@@ -263,7 +246,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00040">40</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00057">57</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
 
 </div>
 </div>

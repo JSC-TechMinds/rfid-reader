@@ -94,10 +94,11 @@ $(document).ready(function(){initNavTree('classRfidPacket.html',''); initResizab
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-types">Protected Types</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="classRfidPacket-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">RfidPacket Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+  <div class="headertitle"><div class="title">RfidPacket Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="dynheader">
@@ -130,11 +131,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a197e5e5dc47a2ca2c93cd70b7d7480c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4889d7f97786db08c0580f5211fa99ed"><td class="memItemLeft" align="right" valign="top">RfidPacket::Function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a4889d7f97786db08c0580f5211fa99ed">getOperation</a> ()</td></tr>
 <tr class="separator:a4889d7f97786db08c0580f5211fa99ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac48572f5cc316ef1042101bd3456cb85"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#ac48572f5cc316ef1042101bd3456cb85">getSerialNumber</a> ()</td></tr>
-<tr class="separator:ac48572f5cc316ef1042101bd3456cb85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aedbe5df3cc47ca60762f6f5560756aae"><td class="memItemLeft" align="right" valign="top"><a id="aedbe5df3cc47ca60762f6f5560756aae" name="aedbe5df3cc47ca60762f6f5560756aae"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>isValid</b> ()=0</td></tr>
-<tr class="separator:aedbe5df3cc47ca60762f6f5560756aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd5980d540b9029db93515332c1d0907"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#abd5980d540b9029db93515332c1d0907">getSerialNumber</a> ()</td></tr>
+<tr class="separator:abd5980d540b9029db93515332c1d0907"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab6c8deb24ab0790143c6d91c730ec8d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#aab6c8deb24ab0790143c6d91c730ec8d">isValid</a> ()</td></tr>
+<tr class="separator:aab6c8deb24ab0790143c6d91c730ec8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-types" name="pro-types"></a>
 Protected Types</h2></td></tr>
@@ -144,9 +144,12 @@ Protected Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a64b10f7e1533b796d4b112de392fad3c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a64b10f7e1533b796d4b112de392fad3c">RfidPacket</a> (uint8_t readerId, RfidPacket::Function operation, String serialNumber=&quot;&quot;)</td></tr>
-<tr class="separator:a64b10f7e1533b796d4b112de392fad3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6543c1162b26562fbd019b026ab18b86"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a6543c1162b26562fbd019b026ab18b86">xorChecksum</a> (uint8_t *buffer, uint8_t length)</td></tr>
+<tr class="memitem:a1092d5f121d404942ac52898d67cf163"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a1092d5f121d404942ac52898d67cf163">RfidPacket</a> (uint8_t readerId, RfidPacket::Function operation, const char *serialNumber=&quot;&quot;)</td></tr>
+<tr class="separator:a1092d5f121d404942ac52898d67cf163"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a6543c1162b26562fbd019b026ab18b86"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a6543c1162b26562fbd019b026ab18b86">xorChecksum</a> (uint8_t *buffer, uint8_t length)</td></tr>
 <tr class="separator:a6543c1162b26562fbd019b026ab18b86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -155,15 +158,29 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aece26e52d99ff052fd15425b8bab1b04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d3121879d053a257d908406deacc6ab"><td class="memItemLeft" align="right" valign="top">RfidPacket::Function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a5d3121879d053a257d908406deacc6ab">operation</a></td></tr>
 <tr class="separator:a5d3121879d053a257d908406deacc6ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8eb02a8bd45ff87e1997857c5ac790d"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#ac8eb02a8bd45ff87e1997857c5ac790d">serialNumber</a></td></tr>
-<tr class="separator:ac8eb02a8bd45ff87e1997857c5ac790d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a822a2f8f2753bec9b07f10d8b981ebd4"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a822a2f8f2753bec9b07f10d8b981ebd4">serialNumberBuffer</a> [SERIAL_NUMBER_LEN+1]</td></tr>
+<tr class="separator:a822a2f8f2753bec9b07f10d8b981ebd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1950de3723f4dc20f8ac4a49a124b1d1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a1950de3723f4dc20f8ac4a49a124b1d1">isValidPacket</a></td></tr>
+<tr class="separator:a1950de3723f4dc20f8ac4a49a124b1d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
 <tr class="memitem:a483c4cb7d09331163c50e35bb8bb0282"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a483c4cb7d09331163c50e35bb8bb0282">END</a> = 0x0D</td></tr>
 <tr class="separator:a483c4cb7d09331163c50e35bb8bb0282"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6efb5cf84351e58563c76525cd0eb57"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#af6efb5cf84351e58563c76525cd0eb57">READER_ID_LEN</a> = 1</td></tr>
+<tr class="separator:af6efb5cf84351e58563c76525cd0eb57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a1cc042e158d419726e8dcf519ce1b5"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a3a1cc042e158d419726e8dcf519ce1b5">READER_ID_PLACEHOLDER</a> = 'X'</td></tr>
 <tr class="separator:a3a1cc042e158d419726e8dcf519ce1b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a643b84f5c23bff08fb12b79c84b6dd41"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a643b84f5c23bff08fb12b79c84b6dd41">HEADER_SIZE</a> = 4</td></tr>
+<tr class="separator:a643b84f5c23bff08fb12b79c84b6dd41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81eb2d98a31d8f988cb100d0f75e7716"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#a81eb2d98a31d8f988cb100d0f75e7716">FOOTER_SIZE</a> = 3</td></tr>
+<tr class="separator:a81eb2d98a31d8f988cb100d0f75e7716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1affde0f19981432857c22de9753add"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#aa1affde0f19981432857c22de9753add">BCC_SIZE</a> = 2</td></tr>
+<tr class="separator:aa1affde0f19981432857c22de9753add"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdb2cb8367441984e4c414270e5e0668"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#acdb2cb8367441984e4c414270e5e0668">SERIAL_NUMBER_LEN</a> = 8</td></tr>
+<tr class="separator:acdb2cb8367441984e4c414270e5e0668"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace6c3682b389c33753cc2ef620f8d4d7"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidPacket.html#ace6c3682b389c33753cc2ef620f8d4d7">MAX_DATA_PAYLOAD_SIZE</a> = SERIAL_NUMBER_LEN + READER_ID_LEN + 1</td></tr>
+<tr class="separator:ace6c3682b389c33753cc2ef620f8d4d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -213,13 +230,40 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00032">32</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00034">34</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a64b10f7e1533b796d4b112de392fad3c" name="a64b10f7e1533b796d4b112de392fad3c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64b10f7e1533b796d4b112de392fad3c">&#9670;&#160;</a></span>RfidPacket()</h2>
+<a id="a9d4ff5b4ec0c37f95a29829da81bd396" name="a9d4ff5b4ec0c37f95a29829da81bd396"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d4ff5b4ec0c37f95a29829da81bd396">&#9670;&#160;</a></span>RfidPacket() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RfidPacket::RfidPacket </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00004">4</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a1092d5f121d404942ac52898d67cf163" name="a1092d5f121d404942ac52898d67cf163"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1092d5f121d404942ac52898d67cf163">&#9670;&#160;</a></span>RfidPacket() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -242,7 +286,7 @@ Static Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">String&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>serialNumber</em> = <code>&quot;&quot;</code>&#160;</td>
         </tr>
         <tr>
@@ -258,7 +302,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00003">3</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00007">7</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
 
 </div>
 </div>
@@ -278,7 +322,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00010">10</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00015">15</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
 
 </div>
 </div>
@@ -297,18 +341,18 @@ Static Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00006">6</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00011">11</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ac48572f5cc316ef1042101bd3456cb85" name="ac48572f5cc316ef1042101bd3456cb85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac48572f5cc316ef1042101bd3456cb85">&#9670;&#160;</a></span>getSerialNumber()</h2>
+<a id="abd5980d540b9029db93515332c1d0907" name="abd5980d540b9029db93515332c1d0907"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd5980d540b9029db93515332c1d0907">&#9670;&#160;</a></span>getSerialNumber()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">String RfidPacket::getSerialNumber </td>
+          <td class="memname">const char * RfidPacket::getSerialNumber </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -316,7 +360,26 @@ Static Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00014">14</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00019">19</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aab6c8deb24ab0790143c6d91c730ec8d" name="aab6c8deb24ab0790143c6d91c730ec8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab6c8deb24ab0790143c6d91c730ec8d">&#9670;&#160;</a></span>isValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RfidPacket::isValid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00033">33</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
 
 </div>
 </div>
@@ -349,16 +412,40 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00018">18</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="packet_8cpp_source.html#l00023">23</a> of file <a class="el" href="packet_8cpp_source.html">packet.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa1affde0f19981432857c22de9753add" name="aa1affde0f19981432857c22de9753add"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1affde0f19981432857c22de9753add">&#9670;&#160;</a></span>BCC_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const uint8_t RfidPacket::BCC_SIZE = 2</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00054">54</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
+
+</div>
+</div>
 <a id="a483c4cb7d09331163c50e35bb8bb0282" name="a483c4cb7d09331163c50e35bb8bb0282"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a483c4cb7d09331163c50e35bb8bb0282">&#9670;&#160;</a></span>END</h2>
 
@@ -379,7 +466,103 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00039">39</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00041">41</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
+
+</div>
+</div>
+<a id="a81eb2d98a31d8f988cb100d0f75e7716" name="a81eb2d98a31d8f988cb100d0f75e7716"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81eb2d98a31d8f988cb100d0f75e7716">&#9670;&#160;</a></span>FOOTER_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const uint8_t RfidPacket::FOOTER_SIZE = 3</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00053">53</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
+
+</div>
+</div>
+<a id="a643b84f5c23bff08fb12b79c84b6dd41" name="a643b84f5c23bff08fb12b79c84b6dd41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a643b84f5c23bff08fb12b79c84b6dd41">&#9670;&#160;</a></span>HEADER_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const uint8_t RfidPacket::HEADER_SIZE = 4</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00052">52</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
+
+</div>
+</div>
+<a id="a1950de3723f4dc20f8ac4a49a124b1d1" name="a1950de3723f4dc20f8ac4a49a124b1d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1950de3723f4dc20f8ac4a49a124b1d1">&#9670;&#160;</a></span>isValidPacket</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RfidPacket::isValidPacket</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00068">68</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
+
+</div>
+</div>
+<a id="ace6c3682b389c33753cc2ef620f8d4d7" name="ace6c3682b389c33753cc2ef620f8d4d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace6c3682b389c33753cc2ef620f8d4d7">&#9670;&#160;</a></span>MAX_DATA_PAYLOAD_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const uint8_t RfidPacket::MAX_DATA_PAYLOAD_SIZE = SERIAL_NUMBER_LEN + READER_ID_LEN + 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00063">63</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
 
 </div>
 </div>
@@ -403,7 +586,31 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00047">47</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00066">66</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
+
+</div>
+</div>
+<a id="af6efb5cf84351e58563c76525cd0eb57" name="af6efb5cf84351e58563c76525cd0eb57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6efb5cf84351e58563c76525cd0eb57">&#9670;&#160;</a></span>READER_ID_LEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const uint8_t RfidPacket::READER_ID_LEN = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00045">45</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
 
 </div>
 </div>
@@ -427,7 +634,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00044">44</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00050">50</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
 
 </div>
 </div>
@@ -451,12 +658,12 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00046">46</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00065">65</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
 
 </div>
 </div>
-<a id="ac8eb02a8bd45ff87e1997857c5ac790d" name="ac8eb02a8bd45ff87e1997857c5ac790d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8eb02a8bd45ff87e1997857c5ac790d">&#9670;&#160;</a></span>serialNumber</h2>
+<a id="acdb2cb8367441984e4c414270e5e0668" name="acdb2cb8367441984e4c414270e5e0668"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdb2cb8367441984e4c414270e5e0668">&#9670;&#160;</a></span>SERIAL_NUMBER_LEN</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -465,7 +672,31 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">String RfidPacket::serialNumber</td>
+          <td class="memname">constexpr const uint8_t RfidPacket::SERIAL_NUMBER_LEN = 8</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00060">60</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
+
+</div>
+</div>
+<a id="a822a2f8f2753bec9b07f10d8b981ebd4" name="a822a2f8f2753bec9b07f10d8b981ebd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a822a2f8f2753bec9b07f10d8b981ebd4">&#9670;&#160;</a></span>serialNumberBuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char RfidPacket::serialNumberBuffer[SERIAL_NUMBER_LEN+1]</td>
         </tr>
       </table>
   </td>
@@ -475,7 +706,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00048">48</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="packet_8h_source.html#l00067">67</a> of file <a class="el" href="packet_8h_source.html">packet.h</a>.</p>
 
 </div>
 </div>
