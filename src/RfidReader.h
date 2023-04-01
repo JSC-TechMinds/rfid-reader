@@ -20,7 +20,7 @@ class RfidReader {
          * 
          * @return String reader serial number.
          */
-        String getSerialNumber();
+        const char * getSerialNumber();
 
         /**
          * @brief Get the Reader ID.
@@ -50,7 +50,7 @@ class RfidReader {
          * @param reader_id ID of the reader. It can be any number in range <1, 8>.
          * @return String 
          */
-        String readCardData(uint8_t reader_id);
+        const char * readCardData(uint8_t reader_id);
 
         /**
          * @brief Re-read the RFID card data.
@@ -60,7 +60,7 @@ class RfidReader {
          * @param reader_id ID of the reader. It can be any number in range <1, 8>.
          * @return String 
          */
-        String reReadCardData(uint8_t reader_id);
+        const char * reReadCardData(uint8_t reader_id);
 
     private:
         uint8_t rxBuffer[RS485_BUFFER_SIZE];

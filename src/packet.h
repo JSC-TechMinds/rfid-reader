@@ -19,33 +19,53 @@ class RfidPacket {
 
         RfidPacket::Function getOperation();
 
-        String getSerialNumber();
+        const char * getSerialNumber();
 
-        virtual bool isValid() = 0;
+        bool isValid();
 
     protected:
+        explicit RfidPacket();
+
         explicit RfidPacket(
             uint8_t readerId,
             RfidPacket::Function operation,
-            String serialNumber = "");
+            const char * serialNumber = "");
 
         enum class Type : uint8_t {
             NUMBER = 'A'
         };
 
-        uint8_t xorChecksum(uint8_t * buffer, uint8_t length);
+        static uint8_t xorChecksum(uint8_t * buffer, uint8_t length);
 
         // Packet-specific control characters
         static constexpr const uint8_t END = 0x0D; // End
+
+        // Reader ID range: <1-8>
+        // A single ASCII character is reserved in the header.
+        static constexpr const uint8_t READER_ID_LEN = 1;
 
         // This value is used instead of actual reader ID when user
         // wants to set the reader ID or read it back.
         // The desired reader ID is appended as a last byte to the data payload.
         static constexpr const uint8_t READER_ID_PLACEHOLDER = 'X';
 
+        static constexpr const uint8_t HEADER_SIZE = 4; // 4 bytes
+        static constexpr const uint8_t FOOTER_SIZE = 3; // 3 bytes
+        static constexpr const uint8_t BCC_SIZE = 2; // 2 bytes for checksum
+
+        // Section 1 to 2 - The year of manufacture.
+        // Section 3 to 4 - The week of manufacture.
+        // Section 5 to 8 - Sequence number, 0001 to 9999.
+        // Example: 99080001
+        static constexpr const uint8_t SERIAL_NUMBER_LEN = 8;
+
+        // Serial number, reader ID, 1 byte for null-terminating character
+        static constexpr const uint8_t MAX_DATA_PAYLOAD_SIZE = SERIAL_NUMBER_LEN + READER_ID_LEN + 1;
+
         uint8_t readerId;
         RfidPacket::Function operation;
-        String serialNumber;
+        char serialNumberBuffer[SERIAL_NUMBER_LEN + 1];
+        bool isValidPacket;
 };
 
 class RfidRequest: public RfidPacket {
@@ -54,11 +74,9 @@ class RfidRequest: public RfidPacket {
         explicit RfidRequest(
             uint8_t readerId,
             RfidPacket::Function operation,
-            String serialNumber = "");
+            const char * serialNumber = "");
 
         size_t toWire(uint8_t * txBuffer, uint8_t bufferSize);
-
-        bool isValid() override;
 
     private:
         // Packet-specific control characters
@@ -69,29 +87,20 @@ class RfidRequest: public RfidPacket {
         void writeFooter(uint8_t * buffer, uint8_t dataLength = 0);
 
         uint8_t calculatePacketSize(uint8_t dataLength = 0);
-
-        static constexpr const uint8_t HEADER_SIZE = 4; // 4 bytes
-        static constexpr const uint8_t FOOTER_SIZE = 3; // 3 bytes
-        static constexpr const uint8_t BCC_SIZE = 2; // 2 bytes for checksum
 };
 
 class RfidResponse: public RfidPacket {
     public:
         static RfidResponse fromWire(uint8_t * rxBuffer, uint8_t length);
 
-        bool isValid() override;
-
     private:
         // Not all operations require reader ID or serial number
         explicit RfidResponse(
-            uint8_t readerId,
-            RfidPacket::Function operation,
-            String serialNumber = "");
+            uint8_t * rxBuffer,
+            uint8_t length);
 
         // Packet-specific control characters
         static constexpr const uint8_t SOH = 0x0A; // Start of heading
-
-        bool isValidPacket;
 };
 
 #endif // RFID_PACKET_H

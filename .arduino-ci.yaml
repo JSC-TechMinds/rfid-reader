@@ -1,5 +1,7 @@
 compile:
-  libraries: ~
+  libraries:
+    - ArduinoLog
+    - TaskManagerIO
   platforms:
     - uno
     - due
@@ -7,7 +9,9 @@ compile:
     - leonardo
 
 unittest:
-  libraries: ~
+  libraries:
+    - ArduinoLog
+    - TaskManagerIO
   platforms:
     - uno
     - due
