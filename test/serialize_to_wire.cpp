@@ -136,4 +136,28 @@ unittest(reader_id_out_of_range_write_no_data) {
     assertEqual(expectedLength, length);
 }
 
+unittest(target_buffer_too_small) {
+    uint8_t smallBuffer[5];
+    size_t length;
+    uint8_t readerId = 1;
+
+    RfidRequest request = RfidRequest(readerId, RfidPacket::Function::READ_SERIAL_NUMBER);
+
+    length = request.toWire(smallBuffer, 5);
+
+    assertEqual(-1, length);
+}
+
+unittest(target_buffer_too_small_for_payload) {
+    uint8_t smallBuffer[9];
+    size_t length;
+    uint8_t readerId = 1; // Ignored
+
+    RfidRequest request = RfidRequest(readerId, RfidPacket::Function::READ_READER_ID, "99080001");
+
+    length = request.toWire(smallBuffer, 9);
+
+    assertEqual(-1, length);
+}
+
 unittest_main()

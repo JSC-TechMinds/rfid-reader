@@ -15,7 +15,7 @@ class RfidPacket {
             RE_READ_CARD_DATA = 'G'
         };
 
-        uint8_t getReaderId();
+        int8_t getReaderId();
 
         RfidPacket::Function getOperation();
 
@@ -27,7 +27,7 @@ class RfidPacket {
         explicit RfidPacket();
 
         explicit RfidPacket(
-            uint8_t readerId,
+            int8_t readerId,
             RfidPacket::Function operation,
             const char * serialNumber = "");
 
@@ -35,7 +35,7 @@ class RfidPacket {
             NUMBER = 'A'
         };
 
-        static uint8_t xorChecksum(uint8_t * buffer, uint8_t length);
+        static uint8_t xorChecksum(uint8_t * buffer, size_t size);
 
         // Packet-specific control characters
         static constexpr const uint8_t END = 0x0D; // End
@@ -59,10 +59,10 @@ class RfidPacket {
         // Example: 99080001
         static constexpr const uint8_t SERIAL_NUMBER_LEN = 8;
 
-        // Serial number, reader ID, 1 byte for null-terminating character
-        static constexpr const uint8_t MAX_DATA_PAYLOAD_SIZE = SERIAL_NUMBER_LEN + READER_ID_LEN + 1;
+        // Serial number, reader ID
+        static constexpr const uint8_t MAX_DATA_PAYLOAD_SIZE = SERIAL_NUMBER_LEN + READER_ID_LEN;
 
-        uint8_t readerId;
+        int8_t readerId;
         RfidPacket::Function operation;
         char serialNumberBuffer[SERIAL_NUMBER_LEN + 1];
         bool isValidPacket;
@@ -72,11 +72,11 @@ class RfidRequest: public RfidPacket {
     public:
         // Not all operations require reader ID or serial number
         explicit RfidRequest(
-            uint8_t readerId,
+            int8_t readerId,
             RfidPacket::Function operation,
             const char * serialNumber = "");
 
-        size_t toWire(uint8_t * txBuffer, uint8_t bufferSize);
+        size_t toWire(uint8_t * txBuffer, size_t size);
 
     private:
         // Packet-specific control characters
@@ -84,23 +84,32 @@ class RfidRequest: public RfidPacket {
 
         void writeHeader(uint8_t * buffer);
 
-        void writeFooter(uint8_t * buffer, uint8_t dataLength = 0);
+        void writeFooter(uint8_t * buffer, size_t size = 0);
 
-        uint8_t calculatePacketSize(uint8_t dataLength = 0);
+        uint8_t calculatePacketSize(size_t dataLength = 0);
 };
 
 class RfidResponse: public RfidPacket {
     public:
-        static RfidResponse fromWire(uint8_t * rxBuffer, uint8_t length);
+        static RfidResponse fromWire(uint8_t * rxBuffer, size_t size);
+
+        const char * getCardData();
 
     private:
         // Not all operations require reader ID or serial number
         explicit RfidResponse(
             uint8_t * rxBuffer,
-            uint8_t length);
+            size_t size);
+
+        // Card data
+        // The first code is the form of a card code, fixed to 0.
+        // The second code after the code for the card (CARD ID) encoding for the ASCII code.
+        static constexpr const uint8_t CARD_DATA_LEN = 9;
 
         // Packet-specific control characters
         static constexpr const uint8_t SOH = 0x0A; // Start of heading
+
+        char cardDataBuffer[CARD_DATA_LEN + 1];
 };
 
 #endif // RFID_PACKET_H

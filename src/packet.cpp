@@ -4,11 +4,11 @@
 RfidPacket::RfidPacket(): readerId(0), operation(RfidPacket::Function::READ_SERIAL_NUMBER) {
 }
 
-RfidPacket::RfidPacket(uint8_t readerId, RfidPacket::Function operation, const char * serialNumber): readerId(readerId), operation(operation) {
+RfidPacket::RfidPacket(int8_t readerId, RfidPacket::Function operation, const char * serialNumber): readerId(readerId), operation(operation) {
     strncpy(serialNumberBuffer, serialNumber, SERIAL_NUMBER_LEN + 1);
 }
 
-uint8_t RfidPacket::getReaderId() {
+int8_t RfidPacket::getReaderId() {
     return readerId;
 }
 
@@ -20,10 +20,10 @@ const char * RfidPacket::getSerialNumber() {
     return serialNumberBuffer;
 }
 
-uint8_t RfidPacket::xorChecksum(uint8_t * buffer, uint8_t length) {
+uint8_t RfidPacket::xorChecksum(uint8_t * buffer, size_t size) {
     uint8_t checkSum = 0;
 
-    for (int i = 0; i < length; i++) {
+    for (int i = 0; i < size; i++) {
         checkSum ^= buffer[i];
     }
 
@@ -34,7 +34,7 @@ bool RfidPacket::isValid() {
     return isValidPacket;
 }
 
-RfidRequest::RfidRequest(uint8_t readerId, RfidPacket::Function operation, const char * serialNumber): RfidPacket(readerId, operation, serialNumber) {
+RfidRequest::RfidRequest(int8_t readerId, RfidPacket::Function operation, const char * serialNumber): RfidPacket(readerId, operation, serialNumber) {
     // Validate packet data.
     isValidPacket = true;
 
@@ -54,11 +54,16 @@ RfidRequest::RfidRequest(uint8_t readerId, RfidPacket::Function operation, const
     }
 }
 
-size_t RfidRequest::toWire(uint8_t * txBuffer, uint8_t bufferSize) {
+size_t RfidRequest::toWire(uint8_t * txBuffer, size_t size) {
     uint8_t dataLength = 0;
 
     if (!isValidPacket) {
         Log.errorln("RfidRequest: Invalid packet!");
+        return -1;
+    }
+
+    if (size < HEADER_SIZE + FOOTER_SIZE) {
+        Log.errorln("RfidRequest: Target buffer too small!");
         return -1;
     }
    
@@ -70,7 +75,7 @@ size_t RfidRequest::toWire(uint8_t * txBuffer, uint8_t bufferSize) {
     // (both in ASCII).
     if (operation == RfidPacket::Function::SET_READER_ID ||
             operation == RfidPacket::Function::READ_READER_ID) {
-                char data[MAX_DATA_PAYLOAD_SIZE];
+                char data[MAX_DATA_PAYLOAD_SIZE + 1];
                 strncpy(data, serialNumberBuffer, SERIAL_NUMBER_LEN + 1);
 
                 // Append reader ID to data field
@@ -79,6 +84,11 @@ size_t RfidRequest::toWire(uint8_t * txBuffer, uint8_t bufferSize) {
                     itoa(readerId, readerIdStr, 10);
                     strncat(data, readerIdStr, READER_ID_LEN + 1);
                 }
+
+                    if (size < HEADER_SIZE + FOOTER_SIZE + strlen(data)) {
+                        Log.errorln("RfidRequest: Payload won't fit the buffer!");
+                        return -1;
+                    }
 
                 memcpy(txBuffer + HEADER_SIZE, data, strlen(data));
                 dataLength = strlen(data);
@@ -102,25 +112,29 @@ void RfidRequest::writeHeader(uint8_t * buffer) {
     buffer[3] = uint8_t(operation);
 }
 
-void RfidRequest::writeFooter(uint8_t * buffer, uint8_t dataLength) {
+void RfidRequest::writeFooter(uint8_t * buffer, size_t size) {
     // BCC checksum
     // Note: Resulting checksum is converted into two ASCII characters.
     // For example: 0x3B is converted into '3', 'B'.
 
-    uint8_t payloadLength = HEADER_SIZE + dataLength;
+    uint8_t payloadLength = HEADER_SIZE + size;
     uint8_t checksum = xorChecksum(buffer, payloadLength);
 
     sprintf((char *) (buffer + payloadLength), "%02X", checksum);
     buffer[payloadLength + BCC_SIZE] = RfidPacket::END;
 }
 
-uint8_t RfidRequest::calculatePacketSize(uint8_t dataLength) {
-    return HEADER_SIZE + dataLength + FOOTER_SIZE;
+uint8_t RfidRequest::calculatePacketSize(size_t packetSize) {
+    return HEADER_SIZE + packetSize + FOOTER_SIZE;
 }
 
-RfidResponse::RfidResponse(uint8_t * rxBuffer, uint8_t length): RfidPacket() {
+RfidResponse::RfidResponse(uint8_t * rxBuffer, size_t size): RfidPacket() {
+    readerId = -1;
+    serialNumberBuffer[0] = '\0';
+    cardDataBuffer[0] = '\0';
     isValidPacket = true;
-    if (length == 0 || rxBuffer[0] != RfidResponse::SOH || rxBuffer[1] != uint8_t(RfidPacket::Type::NUMBER) || rxBuffer[length-1] != RfidPacket::END) {
+
+    if (size == 0 || rxBuffer[0] != RfidResponse::SOH || rxBuffer[1] != uint8_t(RfidPacket::Type::NUMBER) || rxBuffer[size-1] != RfidPacket::END) {
         Log.errorln("RfidResponse: Invalid packet.");
         isValidPacket = false;
         return;
@@ -144,43 +158,52 @@ RfidResponse::RfidResponse(uint8_t * rxBuffer, uint8_t length): RfidPacket() {
         return;
     }
 
-    bool dataPayload = length > (HEADER_SIZE + FOOTER_SIZE);
+    bool hasDataPayload = size > (HEADER_SIZE + FOOTER_SIZE);
+    if (hasDataPayload) {
+        uint8_t payloadBytes = size - (HEADER_SIZE + FOOTER_SIZE);
 
-    if (operation == RfidPacket::Function::SET_READER_ID) {
-        // Reader ID is not in the response packet. Set to 0.
-        readerId = 0;
+        if (payloadBytes > (MAX_DATA_PAYLOAD_SIZE)) {
+            Log.errorln("RfidResponse: Payload exceeds %d bytes.", MAX_DATA_PAYLOAD_SIZE);
+            isValidPacket = false;
+            return;
+        }
+
+        char readerIdStr[2] = { '\0', '\0' };
+        switch (operation) {
+            case RfidPacket::Function::READ_SERIAL_NUMBER:
+                readerIdStr[0] = rxBuffer[2];
+                strncpy(serialNumberBuffer, (const char *) (rxBuffer + HEADER_SIZE), SERIAL_NUMBER_LEN);
+                serialNumberBuffer[SERIAL_NUMBER_LEN] = '\0';
+                break;
+            case RfidPacket::Function::SET_READER_ID:
+                Log.errorln("RfidResponse: Unexpected payload!");
+                isValidPacket = false;
+                return;
+            case RfidPacket::Function::READ_READER_ID:
+                readerIdStr[0] = rxBuffer[HEADER_SIZE];
+                break;
+            case RfidPacket::Function::READ_CARD_DATA:
+            case RfidPacket::Function::RE_READ_CARD_DATA:
+                readerIdStr[0] = rxBuffer[2];
+                strncpy(cardDataBuffer, (const char *) (rxBuffer + HEADER_SIZE), CARD_DATA_LEN);
+                cardDataBuffer[CARD_DATA_LEN] = '\0';
+                break;
+        }
+        readerId = atoi((const char *) readerIdStr);
     } else {
-        if (!dataPayload) {
-            Log.errorln("RfidResponse: Packet doesn't contain data payload.");
-            isValidPacket = false;
-            return;
-        }
-    }
-
-    if (dataPayload) {
-        // We have data payload.
-        uint8_t payloadBytes = length - (HEADER_SIZE + FOOTER_SIZE);
-
-        if (payloadBytes > (MAX_DATA_PAYLOAD_SIZE - 1)) {
-            Log.errorln("RfidResponse: Payload exceeds %d bytes.", MAX_DATA_PAYLOAD_SIZE - 1);
-            isValidPacket = false;
-            return;
-        }
-
-        if (operation == RfidPacket::Function::READ_READER_ID) {
-            // Reader ID is set in the data payload.
-            readerId = atoi((const char *) (rxBuffer + HEADER_SIZE));
-        } else {
-            readerId = atoi((const char *) (rxBuffer + 2));
-            strncpy(serialNumberBuffer, (const char *) (rxBuffer + HEADER_SIZE), SERIAL_NUMBER_LEN);
-            serialNumberBuffer[SERIAL_NUMBER_LEN] = '\0';
+        switch (operation) {
+            case RfidPacket::Function::READ_SERIAL_NUMBER:
+            case RfidPacket::Function::READ_READER_ID:
+                Log.errorln("RfidResponse: Packet doesn't contain data payload.");
+                isValidPacket = false;
+                return;
         }
     }
 
     // Checksum
-    uint8_t checksum = xorChecksum(rxBuffer, length - FOOTER_SIZE);
+    uint8_t checksum = xorChecksum(rxBuffer, size - FOOTER_SIZE);
     uint8_t calculatedChecksum;
-    sscanf((char *) (rxBuffer + (length - FOOTER_SIZE)), "%2hhx", &calculatedChecksum);
+    sscanf((char *) (rxBuffer + (size - FOOTER_SIZE)), "%2hhx", &calculatedChecksum);
 
     if (checksum != calculatedChecksum) {
         Log.errorln("RfidResponse: Invalid checksum!");
@@ -188,6 +211,10 @@ RfidResponse::RfidResponse(uint8_t * rxBuffer, uint8_t length): RfidPacket() {
     }
 }
 
-RfidResponse RfidResponse::fromWire(uint8_t * rxBuffer, uint8_t length) {
-    return RfidResponse(rxBuffer, length);
+RfidResponse RfidResponse::fromWire(uint8_t * rxBuffer, size_t size) {
+    return RfidResponse(rxBuffer, size);
+}
+
+const char * RfidResponse::getCardData() {
+    return cardDataBuffer;
 }

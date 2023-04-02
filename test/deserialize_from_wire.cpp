@@ -63,4 +63,42 @@ unittest(read_serial_number_from_reader_8) {
     assertTrue(response.isValid());
 }
 
+unittest(set_reader_id) {
+    uint8_t responseData[] = { 0x0A, 'A', 'X', 'C', '5', '0', 0x0D };
+
+    RfidResponse response = RfidResponse::fromWire(responseData, 7);
+    assertEqual((uint8_t) RfidPacket::Function::SET_READER_ID, (uint8_t) response.getOperation());
+    assertEqual(-1, response.getReaderId());
+    assertEqual("", response.getSerialNumber());
+    assertTrue(response.isValid());
+}
+
+unittest(set_reader_id_with_payload_is_invalid) {
+    uint8_t responseData[] = { 0x0A, 'A', 'X', 'C', '1', '6', '1', 0x0D };
+
+    RfidResponse response = RfidResponse::fromWire(responseData, 8);
+    assertFalse(response.isValid());
+}
+
+unittest(read_reader_id) {
+    uint8_t responseData[] = { 0x0A, 'A', 'X', 'D', '2', '6', '5', 0x0D };
+
+    RfidResponse response = RfidResponse::fromWire(responseData, 8);
+    assertEqual((uint8_t) RfidPacket::Function::READ_READER_ID, (uint8_t) response.getOperation());
+    assertEqual(2, response.getReaderId());
+    assertEqual("", response.getSerialNumber());
+    assertTrue(response.isValid());
+}
+
+unittest(read_card_data_no_card) {
+    uint8_t responseData[] = { 0x0A, 'A', '1', 'F', '3', 'C', 0x0D };
+
+    RfidResponse response = RfidResponse::fromWire(responseData, 7);
+    assertEqual((uint8_t) RfidPacket::Function::READ_CARD_DATA, (uint8_t) response.getOperation());
+    assertEqual(1, response.getReaderId());
+    assertEqual("", response.getSerialNumber());
+    assertEqual("", response.getCardData());
+    assertTrue(response.isValid());
+}
+
 unittest_main()
