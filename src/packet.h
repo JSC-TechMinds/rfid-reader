@@ -44,6 +44,9 @@ class RfidPacket {
         // A single ASCII character is reserved in the header.
         static constexpr const uint8_t READER_ID_LEN = 1;
 
+        // This value is set as Reader ID if the ID is not set in the packet.
+        static constexpr const int8_t READER_ID_NOT_SET = -1;
+
         // This value is used instead of actual reader ID when user
         // wants to set the reader ID or read it back.
         // The desired reader ID is appended as a last byte to the data payload.
@@ -59,8 +62,9 @@ class RfidPacket {
         // Example: 99080001
         static constexpr const uint8_t SERIAL_NUMBER_LEN = 8;
 
-        // Serial number, reader ID
-        static constexpr const uint8_t MAX_DATA_PAYLOAD_SIZE = SERIAL_NUMBER_LEN + READER_ID_LEN;
+        // Max payload should hold the serial numer + reader ID or card data.
+        // In both cases, the maximum size is 9 bytes.
+        static constexpr const uint8_t MAX_DATA_PAYLOAD_SIZE = 9;
 
         int8_t readerId;
         RfidPacket::Function operation;

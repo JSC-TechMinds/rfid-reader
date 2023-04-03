@@ -129,7 +129,8 @@ uint8_t RfidRequest::calculatePacketSize(size_t packetSize) {
 }
 
 RfidResponse::RfidResponse(uint8_t * rxBuffer, size_t size): RfidPacket() {
-    readerId = -1;
+    readerId = READER_ID_NOT_SET;
+    operation = RfidPacket::Function::READ_SERIAL_NUMBER;
     serialNumberBuffer[0] = '\0';
     cardDataBuffer[0] = '\0';
     isValidPacket = true;
@@ -150,7 +151,7 @@ RfidResponse::RfidResponse(uint8_t * rxBuffer, size_t size): RfidPacket() {
     } else if (operationId == (char) RfidPacket::Function::READ_CARD_DATA) {
         operation = RfidPacket::Function::READ_CARD_DATA;
     } else if (operationId == (char) RfidPacket::Function::RE_READ_CARD_DATA) {
-        operation = RfidPacket::Function::READ_CARD_DATA;
+        operation = RfidPacket::Function::RE_READ_CARD_DATA;
     } else {
         Log.errorln("RfidResponse: Invalid operation %s.", operationId);
         operation = RfidPacket::Function::SET_READER_ID;
@@ -159,19 +160,21 @@ RfidResponse::RfidResponse(uint8_t * rxBuffer, size_t size): RfidPacket() {
     }
 
     bool hasDataPayload = size > (HEADER_SIZE + FOOTER_SIZE);
+    char readerIdStr[2] = { '\0', '\0' };
+
     if (hasDataPayload) {
         uint8_t payloadBytes = size - (HEADER_SIZE + FOOTER_SIZE);
 
-        if (payloadBytes > (MAX_DATA_PAYLOAD_SIZE)) {
-            Log.errorln("RfidResponse: Payload exceeds %d bytes.", MAX_DATA_PAYLOAD_SIZE);
-            isValidPacket = false;
-            return;
-        }
-
-        char readerIdStr[2] = { '\0', '\0' };
         switch (operation) {
             case RfidPacket::Function::READ_SERIAL_NUMBER:
                 readerIdStr[0] = rxBuffer[2];
+
+                if (payloadBytes < SERIAL_NUMBER_LEN || payloadBytes > SERIAL_NUMBER_LEN) {
+                    Log.errorln("RfidResponse: Serial number has unexpected size.");
+                    isValidPacket = false;
+                    return;
+                }
+
                 strncpy(serialNumberBuffer, (const char *) (rxBuffer + HEADER_SIZE), SERIAL_NUMBER_LEN);
                 serialNumberBuffer[SERIAL_NUMBER_LEN] = '\0';
                 break;
@@ -185,13 +188,24 @@ RfidResponse::RfidResponse(uint8_t * rxBuffer, size_t size): RfidPacket() {
             case RfidPacket::Function::READ_CARD_DATA:
             case RfidPacket::Function::RE_READ_CARD_DATA:
                 readerIdStr[0] = rxBuffer[2];
-                strncpy(cardDataBuffer, (const char *) (rxBuffer + HEADER_SIZE), CARD_DATA_LEN);
-                cardDataBuffer[CARD_DATA_LEN] = '\0';
+
+                if (payloadBytes > CARD_DATA_LEN) {
+                    Log.warningln("RfidResponse: Card data payload is longer than expected. It will be trimmed.");
+                    payloadBytes = CARD_DATA_LEN;
+                }
+
+                strncpy(cardDataBuffer, (const char *) (rxBuffer + HEADER_SIZE), payloadBytes);
+                cardDataBuffer[payloadBytes] = '\0';
                 break;
         }
         readerId = atoi((const char *) readerIdStr);
     } else {
         switch (operation) {
+            case RfidPacket::Function::READ_CARD_DATA:
+            case RfidPacket::Function::RE_READ_CARD_DATA:
+                readerIdStr[0] = rxBuffer[2];
+                readerId = atoi((const char *) readerIdStr);
+                break;
             case RfidPacket::Function::READ_SERIAL_NUMBER:
             case RfidPacket::Function::READ_READER_ID:
                 Log.errorln("RfidResponse: Packet doesn't contain data payload.");
