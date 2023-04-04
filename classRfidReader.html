@@ -103,12 +103,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af55559a1c07612bb35cf9b314cc4431c"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidReader.html#af55559a1c07612bb35cf9b314cc4431c">getSerialNumber</a> (uint8_t readerId)</td></tr>
 <tr class="memdesc:af55559a1c07612bb35cf9b314cc4431c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the reader serial number.  <a href="classRfidReader.html#af55559a1c07612bb35cf9b314cc4431c">More...</a><br /></td></tr>
 <tr class="separator:af55559a1c07612bb35cf9b314cc4431c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af67a191975b1ba5263ce014bda2549cd"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidReader.html#af67a191975b1ba5263ce014bda2549cd">getReaderId</a> (String serialNumber)</td></tr>
-<tr class="memdesc:af67a191975b1ba5263ce014bda2549cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Reader ID.  <a href="classRfidReader.html#af67a191975b1ba5263ce014bda2549cd">More...</a><br /></td></tr>
-<tr class="separator:af67a191975b1ba5263ce014bda2549cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05438ebcc9c7d79a6144226054e799b1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidReader.html#a05438ebcc9c7d79a6144226054e799b1">setReaderId</a> (uint8_t readerId, String serialNumber)</td></tr>
-<tr class="memdesc:a05438ebcc9c7d79a6144226054e799b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Reader ID.  <a href="classRfidReader.html#a05438ebcc9c7d79a6144226054e799b1">More...</a><br /></td></tr>
-<tr class="separator:a05438ebcc9c7d79a6144226054e799b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0f265caf828ea7d05fb34dc8adf884f"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidReader.html#ae0f265caf828ea7d05fb34dc8adf884f">getReaderId</a> (const char *serialNumber)</td></tr>
+<tr class="memdesc:ae0f265caf828ea7d05fb34dc8adf884f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Reader ID.  <a href="classRfidReader.html#ae0f265caf828ea7d05fb34dc8adf884f">More...</a><br /></td></tr>
+<tr class="separator:ae0f265caf828ea7d05fb34dc8adf884f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae782eddfab870c23527f90223bad84eb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidReader.html#ae782eddfab870c23527f90223bad84eb">setReaderId</a> (uint8_t readerId, const char *serialNumber)</td></tr>
+<tr class="memdesc:ae782eddfab870c23527f90223bad84eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Reader ID.  <a href="classRfidReader.html#ae782eddfab870c23527f90223bad84eb">More...</a><br /></td></tr>
+<tr class="separator:ae782eddfab870c23527f90223bad84eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa26d7130f43ad4fc80547e4324824914"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRfidReader.html#aa26d7130f43ad4fc80547e4324824914">readCardData</a> (uint8_t readerId)</td></tr>
 <tr class="memdesc:aa26d7130f43ad4fc80547e4324824914"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the RFID card data.  <a href="classRfidReader.html#aa26d7130f43ad4fc80547e4324824914">More...</a><br /></td></tr>
 <tr class="separator:aa26d7130f43ad4fc80547e4324824914"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -118,7 +118,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="RfidReader_8h_source.html#l00007">7</a> of file <a class="el" href="RfidReader_8h_source.html">RfidReader.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RfidReader_8h_source.html#l00015">15</a> of file <a class="el" href="RfidReader_8h_source.html">RfidReader.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af70e8c039f401f04e869746f90972e5e" name="af70e8c039f401f04e869746f90972e5e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af70e8c039f401f04e869746f90972e5e">&#9670;&#160;</a></span>RfidReader()</h2>
@@ -159,16 +159,16 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="af67a191975b1ba5263ce014bda2549cd" name="af67a191975b1ba5263ce014bda2549cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af67a191975b1ba5263ce014bda2549cd">&#9670;&#160;</a></span>getReaderId()</h2>
+<a id="ae0f265caf828ea7d05fb34dc8adf884f" name="ae0f265caf828ea7d05fb34dc8adf884f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0f265caf828ea7d05fb34dc8adf884f">&#9670;&#160;</a></span>getReaderId()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t RfidReader::getReaderId </td>
+          <td class="memname">int8_t RfidReader::getReaderId </td>
           <td>(</td>
-          <td class="paramtype">String&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>serialNumber</em></td><td>)</td>
           <td></td>
         </tr>
@@ -183,7 +183,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>uint8_t Reader ID, value &lt;1-8&gt;. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>int8_t Reader ID, value &lt;1-8&gt; or -1 if the call failed. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="RfidReader_8cpp_source.html#l00021">21</a> of file <a class="el" href="RfidReader_8cpp_source.html">RfidReader.cpp</a>.</p>
 
@@ -213,7 +213,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>String reader serial number. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>const char * reader serial number. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="RfidReader_8cpp_source.html#l00009">9</a> of file <a class="el" href="RfidReader_8cpp_source.html">RfidReader.cpp</a>.</p>
 
@@ -242,9 +242,9 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>String </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>const char * card data. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RfidReader_8cpp_source.html#l00029">29</a> of file <a class="el" href="RfidReader_8cpp_source.html">RfidReader.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RfidReader_8cpp_source.html#l00041">41</a> of file <a class="el" href="RfidReader_8cpp_source.html">RfidReader.cpp</a>.</p>
 
 </div>
 </div>
@@ -272,14 +272,14 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>String </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>const char * card data. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RfidReader_8cpp_source.html#l00033">33</a> of file <a class="el" href="RfidReader_8cpp_source.html">RfidReader.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RfidReader_8cpp_source.html#l00053">53</a> of file <a class="el" href="RfidReader_8cpp_source.html">RfidReader.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a05438ebcc9c7d79a6144226054e799b1" name="a05438ebcc9c7d79a6144226054e799b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05438ebcc9c7d79a6144226054e799b1">&#9670;&#160;</a></span>setReaderId()</h2>
+<a id="ae782eddfab870c23527f90223bad84eb" name="ae782eddfab870c23527f90223bad84eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae782eddfab870c23527f90223bad84eb">&#9670;&#160;</a></span>setReaderId()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -293,7 +293,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">String&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>serialNumber</em>&#160;</td>
         </tr>
         <tr>
@@ -317,7 +317,7 @@ Public Member Functions</h2></td></tr>
 <dd>
 false if the operation has failed. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RfidReader_8cpp_source.html#l00025">25</a> of file <a class="el" href="RfidReader_8cpp_source.html">RfidReader.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RfidReader_8cpp_source.html#l00031">31</a> of file <a class="el" href="RfidReader_8cpp_source.html">RfidReader.cpp</a>.</p>
 
 </div>
 </div>
