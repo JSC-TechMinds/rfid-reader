@@ -1,19 +1,15 @@
 compile:
   libraries:
     - ArduinoLog
-    - TaskManagerIO
   platforms:
-    - uno
-    - due
-    - mega2560
-    - leonardo
+    - esp32
 
 unittest:
   libraries:
     - ArduinoLog
-    - TaskManagerIO
   platforms:
     - uno
     - due
     - mega2560
     - leonardo
+    - esp32

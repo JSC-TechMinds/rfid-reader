@@ -197,6 +197,8 @@ RfidResponse::RfidResponse(uint8_t * rxBuffer, size_t size): RfidPacket() {
                 strncpy(cardDataBuffer, (const char *) (rxBuffer + HEADER_SIZE), payloadBytes);
                 cardDataBuffer[payloadBytes] = '\0';
                 break;
+            default:
+                break;
         }
         readerId = atoi((const char *) readerIdStr);
     } else {
@@ -211,6 +213,8 @@ RfidResponse::RfidResponse(uint8_t * rxBuffer, size_t size): RfidPacket() {
                 Log.errorln("RfidResponse: Packet doesn't contain data payload.");
                 isValidPacket = false;
                 return;
+            default:
+                break;
         }
     }
 
