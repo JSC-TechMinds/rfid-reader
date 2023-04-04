@@ -25,7 +25,6 @@
 var NAVTREE =
 [
   [ "SimpleRelay", "index.html", [
-    [ "Examples", "md_examples_README.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
