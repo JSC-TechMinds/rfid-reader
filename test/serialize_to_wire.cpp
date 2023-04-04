@@ -160,4 +160,19 @@ unittest(target_buffer_too_small_for_payload) {
     assertEqual(-1, length);
 }
 
+unittest(read_reader_id_no_id_validation) {
+    size_t length;
+    uint8_t readerId = -1; // Ignored, out of range ID value
+
+    uint8_t expectedData[] = { 0x09, 'A', 'X', 'D', '9', '9', '0', '8', '0', '0', '0', '1', '5', 'D', 0x0D };
+    size_t expectedLength = 15;
+
+    RfidRequest request = RfidRequest(readerId, RfidPacket::Function::READ_READER_ID, "99080001");
+
+    length = request.toWire(buffer, 64);
+
+    assertEqual(expectedLength, length);
+    assertEqual(0, memcmp(buffer, expectedData, expectedLength));
+}
+
 unittest_main()

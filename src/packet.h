@@ -97,6 +97,8 @@ class RfidResponse: public RfidPacket {
     public:
         static RfidResponse fromWire(uint8_t * rxBuffer, size_t size);
 
+        static RfidResponse invalidResponse();
+
         const char * getCardData();
 
     private:

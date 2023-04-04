@@ -1,3 +1,5 @@
+// This example uses synchronous blocking API.
+
 #include <Arduino.h>
 #include <ArduinoLog.h>
 #include "RfidReader.h"

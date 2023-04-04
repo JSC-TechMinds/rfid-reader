@@ -1,6 +1,7 @@
 compile:
   libraries:
     - ArduinoLog
+    - TaskManagerIO
   platforms:
     - esp32
 

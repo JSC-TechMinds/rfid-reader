@@ -38,8 +38,8 @@ RfidRequest::RfidRequest(int8_t readerId, RfidPacket::Function operation, const 
     // Validate packet data.
     isValidPacket = true;
 
-    if (readerId < 1 || readerId > 8) {
-        Log.errorln("RfidRequest: Invalid reader ID %d!", readerId);
+    if (operation != RfidPacket::Function::READ_READER_ID && (readerId < 1 || readerId > 8)) {
+        Log.errorln(F("RfidRequest: Invalid reader ID %d!"), readerId);
         isValidPacket = false;
     }
 
@@ -49,7 +49,7 @@ RfidRequest::RfidRequest(int8_t readerId, RfidPacket::Function operation, const 
         (operation == RfidPacket::Function::SET_READER_ID ||
          operation == RfidPacket::Function::READ_READER_ID)
           && strlen(serialNumber) != SERIAL_NUMBER_LEN) {
-        Log.errorln("RfidRequest: Invalid serial number %s. The serial number should have exactly %d characters!", serialNumber, SERIAL_NUMBER_LEN);
+        Log.errorln(F("RfidRequest: Invalid serial number %s. The serial number should have exactly %d characters!"), serialNumber, SERIAL_NUMBER_LEN);
         isValidPacket = false;
     }
 }
@@ -58,12 +58,12 @@ size_t RfidRequest::toWire(uint8_t * txBuffer, size_t size) {
     uint8_t dataLength = 0;
 
     if (!isValidPacket) {
-        Log.errorln("RfidRequest: Invalid packet!");
+        Log.errorln(F("RfidRequest: Invalid packet!"));
         return -1;
     }
 
     if (size < HEADER_SIZE + FOOTER_SIZE) {
-        Log.errorln("RfidRequest: Target buffer too small!");
+        Log.errorln(F("RfidRequest: Target buffer too small!"));
         return -1;
     }
    
@@ -86,7 +86,7 @@ size_t RfidRequest::toWire(uint8_t * txBuffer, size_t size) {
                 }
 
                     if (size < HEADER_SIZE + FOOTER_SIZE + strlen(data)) {
-                        Log.errorln("RfidRequest: Payload won't fit the buffer!");
+                        Log.errorln(F("RfidRequest: Payload won't fit the buffer!"));
                         return -1;
                     }
 
@@ -135,8 +135,14 @@ RfidResponse::RfidResponse(uint8_t * rxBuffer, size_t size): RfidPacket() {
     cardDataBuffer[0] = '\0';
     isValidPacket = true;
 
-    if (size == 0 || rxBuffer[0] != RfidResponse::SOH || rxBuffer[1] != uint8_t(RfidPacket::Type::NUMBER) || rxBuffer[size-1] != RfidPacket::END) {
-        Log.errorln("RfidResponse: Invalid packet.");
+    if (size == 0) {
+        Log.errorln(F("RfidResponse: No data."));
+        isValidPacket = false;
+        return;
+    }
+
+    if (rxBuffer[0] != RfidResponse::SOH || rxBuffer[1] != uint8_t(RfidPacket::Type::NUMBER) || rxBuffer[size-1] != RfidPacket::END) {
+        Log.errorln(F("RfidResponse: Invalid packet."));
         isValidPacket = false;
         return;
     }
@@ -153,7 +159,7 @@ RfidResponse::RfidResponse(uint8_t * rxBuffer, size_t size): RfidPacket() {
     } else if (operationId == (char) RfidPacket::Function::RE_READ_CARD_DATA) {
         operation = RfidPacket::Function::RE_READ_CARD_DATA;
     } else {
-        Log.errorln("RfidResponse: Invalid operation %s.", operationId);
+        Log.errorln(F("RfidResponse: Invalid operation %s."), operationId);
         operation = RfidPacket::Function::SET_READER_ID;
         isValidPacket = false;
         return;
@@ -170,7 +176,7 @@ RfidResponse::RfidResponse(uint8_t * rxBuffer, size_t size): RfidPacket() {
                 readerIdStr[0] = rxBuffer[2];
 
                 if (payloadBytes < SERIAL_NUMBER_LEN || payloadBytes > SERIAL_NUMBER_LEN) {
-                    Log.errorln("RfidResponse: Serial number has unexpected size.");
+                    Log.errorln(F("RfidResponse: Serial number has unexpected size."));
                     isValidPacket = false;
                     return;
                 }
@@ -179,7 +185,7 @@ RfidResponse::RfidResponse(uint8_t * rxBuffer, size_t size): RfidPacket() {
                 serialNumberBuffer[SERIAL_NUMBER_LEN] = '\0';
                 break;
             case RfidPacket::Function::SET_READER_ID:
-                Log.errorln("RfidResponse: Unexpected payload!");
+                Log.errorln(F("RfidResponse: Unexpected payload!"));
                 isValidPacket = false;
                 return;
             case RfidPacket::Function::READ_READER_ID:
@@ -190,7 +196,7 @@ RfidResponse::RfidResponse(uint8_t * rxBuffer, size_t size): RfidPacket() {
                 readerIdStr[0] = rxBuffer[2];
 
                 if (payloadBytes > CARD_DATA_LEN) {
-                    Log.warningln("RfidResponse: Card data payload is longer than expected. It will be trimmed.");
+                    Log.warningln(F("RfidResponse: Card data payload is longer than expected. It will be trimmed."));
                     payloadBytes = CARD_DATA_LEN;
                 }
 
@@ -210,7 +216,7 @@ RfidResponse::RfidResponse(uint8_t * rxBuffer, size_t size): RfidPacket() {
                 break;
             case RfidPacket::Function::READ_SERIAL_NUMBER:
             case RfidPacket::Function::READ_READER_ID:
-                Log.errorln("RfidResponse: Packet doesn't contain data payload.");
+                Log.errorln(F("RfidResponse: Packet doesn't contain data payload."));
                 isValidPacket = false;
                 return;
             default:
@@ -224,13 +230,18 @@ RfidResponse::RfidResponse(uint8_t * rxBuffer, size_t size): RfidPacket() {
     sscanf((char *) (rxBuffer + (size - FOOTER_SIZE)), "%2hhx", &calculatedChecksum);
 
     if (checksum != calculatedChecksum) {
-        Log.errorln("RfidResponse: Invalid checksum!");
+        Log.errorln(F("RfidResponse: Invalid checksum!"));
         isValidPacket = false;
     }
 }
 
 RfidResponse RfidResponse::fromWire(uint8_t * rxBuffer, size_t size) {
     return RfidResponse(rxBuffer, size);
+}
+
+RfidResponse RfidResponse::invalidResponse() {
+    uint8_t buffer[1];
+    return RfidResponse(buffer, 0);
 }
 
 const char * RfidResponse::getCardData() {

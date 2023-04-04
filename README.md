@@ -14,6 +14,33 @@ This is an Arduino library to support one specific RS485 RFID reader. There isn'
 - [Extended Doxygen Documentation](https://jsc-electronics.github.io/rfid-reader)
 - [Examples](examples)
 
+# Sync and async modes
+
+This library supports synchronous (blocking) API and asynchronous (non-blocking) API. The main reason is that often synchronous API is easier to use and due to its simplicity, it's better while writing and debugging a test code. For production code we recommend using async API.
+
+Switching to async mode is really easy! Just follow these steps:
+
+- Install [TaskManagerIO](https://github.com/davetcc/TaskManagerIO) library. It's also listed as an (optional) dependency of this package.
+- Modify your script accordingly:
+
+```cpp
+#include <TaskManagerIO.h>
+
+// Enable async mode. If you're using PlatformIO, you can define this as a build flag.
+#define USE_ASYNC_IO
+
+void setup() {
+    ...
+}
+
+void loop() {
+    # Call taskManager regularly in a loop.
+    taskManager.runLoop();
+}
+```
+
+Besides these changes, the API is identical to the synchronous one. All the heavy work is handled by the libraries behind the scenes. You can also take a look at the [async example](/examples/AsyncDetectTag/AsyncDetectTag.ino).
+
 ## License
 
 Copyright (c) JSC electronics. All rights reserved.

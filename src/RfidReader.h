@@ -1,6 +1,14 @@
 #ifndef RS485_RFID_READER_H
 #define RS485_RFID_READER_H
 
+// Use async non-blocking mode.
+// Requires TaskManagerIO as a dependency.
+// #define USE_ASYNC_IO
+
+#ifdef USE_ASYNC_IO
+#include <TaskManagerIO.h>
+#endif
+
 #include <Arduino.h>
 #include "packet.h"
 
@@ -11,6 +19,7 @@ class RfidReader {
         RfidResponse requestData(RfidPacket::Function operation, int8_t readerId, const char * serialNumber);
 
         static constexpr const uint8_t BUFFER_SIZE = 64; // bytes
+        static constexpr const uint8_t NUM_RETRIES = 5;
 
         uint8_t buffer[BUFFER_SIZE];
         Stream& bus;
@@ -27,7 +36,7 @@ class RfidReader {
          * the 5 to 8 digits are sequence number, 0001 to 9999.
          * 
          * @param readerId ID of the reader. It can be any number in range <1, 8>.
-         * @return String reader serial number.
+         * @return const char * reader serial number.
          */
         const char * getSerialNumber(uint8_t readerId);
 
@@ -37,9 +46,9 @@ class RfidReader {
          * Read the Reader ID using the reader factory serial number.
          * 
          * @param serialNumber Reader factory serial number
-         * @return uint8_t Reader ID, value <1-8>.
+         * @return int8_t Reader ID, value <1-8> or -1 if the call failed.
          */
-        uint8_t getReaderId(String serialNumber);
+        int8_t getReaderId(const char * serialNumber);
 
         /**
          * @brief Set the Reader ID.
@@ -51,13 +60,13 @@ class RfidReader {
          * @return true if the operation was successful.
          * @return false if the operation has failed.
          */
-        bool setReaderId(uint8_t readerId, String serialNumber);
+        bool setReaderId(uint8_t readerId, const char * serialNumber);
 
         /**
          * @brief Read the RFID card data.
          * 
          * @param readerId ID of the reader. It can be any number in range <1, 8>.
-         * @return String 
+         * @return const char * card data. 
          */
         const char * readCardData(uint8_t readerId);
 
@@ -67,7 +76,7 @@ class RfidReader {
          * This method is to re-read the card reader to read the card information.
          * 
          * @param readerId ID of the reader. It can be any number in range <1, 8>.
-         * @return String 
+         * @return const char * card data. 
          */
         const char * reReadCardData(uint8_t readerId);
 };
