@@ -23,10 +23,13 @@ class RfidReader {
 
         uint8_t buffer[BUFFER_SIZE];
         Stream& bus;
-        uint8_t rePin;
+
+        // enabled = RE pin active, disabled = DE pin active
+        // https://www.cuidevices.com/blog/rs-485-serial-interface-explained
+        uint8_t ioPin;
 
     public:
-        explicit RfidReader(Stream& bus, uint8_t rePin);
+        explicit RfidReader(Stream& bus, uint8_t ioPin);
 
         /**
          * @brief Get the reader serial number.

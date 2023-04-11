@@ -23,6 +23,7 @@ void setup() {
     Log.begin(LOG_LEVEL_NOTICE, &Serial);
     delay(1000);
     Log.noticeln("Reading RFID tags...");
+    Serial2.begin(19200, SERIAL_8E1, RO_PIN, DI_PIN);
 }
 
 void loop() {

@@ -1,8 +1,8 @@
 #include <ArduinoLog.h>
 #include "RfidReader.h"
 
-RfidReader::RfidReader(Stream& bus, uint8_t rePin): bus(bus), rePin(rePin) {
-    pinMode(rePin, OUTPUT);
+RfidReader::RfidReader(Stream& bus, uint8_t ioPin): bus(bus), ioPin(ioPin) {
+    pinMode(ioPin, OUTPUT);
     setRs485ReceiveMode();
 }
 
@@ -63,22 +63,24 @@ const char * RfidReader::reReadCardData(uint8_t readerId) {
 }
 
 void RfidReader::setRs485TransferMode() {
+    // Activate RE pin
     #ifdef USE_ASYNC_IO
-    digitalWrite(rePin, HIGH);
+    digitalWrite(ioPin, HIGH);
     taskManager.yieldForMicros(6000);
     #else
-    digitalWrite(rePin, HIGH);
+    digitalWrite(ioPin, HIGH);
     delay(5);
     #endif
 }
         
 void RfidReader::setRs485ReceiveMode() {
+    // Activate DE pin
     #ifdef USE_ASYNC_IO
     taskManager.yieldForMicros(6000);
-    digitalWrite(rePin, LOW);
+    digitalWrite(ioPin, LOW);
     #else
     delay(5);
-    digitalWrite(rePin, LOW);
+    digitalWrite(ioPin, LOW);
     #endif
 }
 
