@@ -64,19 +64,13 @@ const char * RfidReader::reReadCardData(uint8_t readerId) {
 
 void RfidReader::setRs485TransferMode() {
     // Activate RE pin
-    #ifdef USE_ASYNC_IO
     digitalWrite(ioPin, HIGH);
-    taskManager.yieldForMicros(6000);
-    #else
-    digitalWrite(ioPin, HIGH);
-    delay(5);
-    #endif
 }
         
 void RfidReader::setRs485ReceiveMode() {
     // Activate DE pin
     #ifdef USE_ASYNC_IO
-    taskManager.yieldForMicros(6000);
+    taskManager.yieldForMicros(5000);
     digitalWrite(ioPin, LOW);
     #else
     delay(5);
@@ -91,20 +85,22 @@ RfidResponse RfidReader::requestData(RfidPacket::Function operation, int8_t read
     if (request.isValid()) {
         size_t requestSize = request.toWire(buffer, BUFFER_SIZE);
 
-        setRs485TransferMode();
-        bus.write(buffer, requestSize);
-        setRs485ReceiveMode();
-
         for (int i=0; i<NUM_RETRIES; i++) {
-            if (bus.available()) {
-                break;
-            }
+            setRs485TransferMode();
+            bus.write(buffer, requestSize);
+            setRs485ReceiveMode();
 
             #ifdef USE_ASYNC_IO
             taskManager.yieldForMicros(100000);
             #else
             delay(100);
             #endif
+
+            if (bus.available()) {
+                break;
+            }
+
+            bus.flush();
         }
 
         if (!bus.available()) {
