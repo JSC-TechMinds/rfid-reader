@@ -16,11 +16,10 @@ class RfidReader {
     private:
         void setRs485ReceiveMode();
         void setRs485TransferMode();
+        void waitForTransferFinish(RfidPacket::Function operation);
         RfidResponse requestData(RfidPacket::Function operation, int8_t readerId, const char * serialNumber);
 
         static constexpr const uint8_t BUFFER_SIZE = 64; // bytes
-        static constexpr const uint8_t NUM_RETRIES = 5;
-
         uint8_t buffer[BUFFER_SIZE];
         Stream& bus;
 

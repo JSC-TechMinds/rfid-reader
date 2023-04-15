@@ -29,9 +29,9 @@ void setup() {
 void loop() {
     taskManager.runLoop();
 
-    const char * newTag = reader.reReadCardData(2);
-    if (strncmp(cardData, newTag, 10) != 0) {
+    const char * newTag = reader.readCardData(1);
+
+    if (strlen(newTag) > 0) {
         Log.noticeln("Received a new tag: %s", newTag);
-        strncpy(cardData, newTag, 10);
     }
 }

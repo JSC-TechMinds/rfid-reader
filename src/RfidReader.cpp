@@ -69,12 +69,31 @@ void RfidReader::setRs485TransferMode() {
         
 void RfidReader::setRs485ReceiveMode() {
     // Activate DE pin
+    digitalWrite(ioPin, LOW);
+}
+
+/*
+ * Set proper delay to wait till all the data from the buffer are transmitted.
+ * Values were defined by trial-and-error approach. Improvements are welcome.
+*/
+void RfidReader::waitForTransferFinish(RfidPacket::Function operation) {
+    uint16_t delayMicro = 0;
+
+    switch(operation) {
+        case RfidPacket::Function::READ_READER_ID:
+        case RfidPacket::Function::SET_READER_ID:
+            delayMicro = 9000;
+            break;
+        default:
+            delayMicro = 5000;
+            break;
+
+    }
+
     #ifdef USE_ASYNC_IO
-    taskManager.yieldForMicros(5000);
-    digitalWrite(ioPin, LOW);
+    taskManager.yieldForMicros(delayMicro);
     #else
-    delay(5);
-    digitalWrite(ioPin, LOW);
+    delayMicroseconds(delayMicro);
     #endif
 }
 
@@ -85,26 +104,18 @@ RfidResponse RfidReader::requestData(RfidPacket::Function operation, int8_t read
     if (request.isValid()) {
         size_t requestSize = request.toWire(buffer, BUFFER_SIZE);
 
-        for (int i=0; i<NUM_RETRIES; i++) {
-            setRs485TransferMode();
-            bus.write(buffer, requestSize);
-            setRs485ReceiveMode();
+        setRs485TransferMode();
+        bus.write(buffer, requestSize);
+        waitForTransferFinish(operation);
+        setRs485ReceiveMode();
 
-            #ifdef USE_ASYNC_IO
-            taskManager.yieldForMicros(100000);
-            #else
-            delay(100);
-            #endif
-
-            if (bus.available()) {
-                break;
-            }
-
-            bus.flush();
-        }
+        #ifdef USE_ASYNC_IO
+        taskManager.yieldForMicros(100000);
+        #else
+        delay(100);
+        #endif
 
         if (!bus.available()) {
-            Log.errorln(F("Request timed out!"));
             return RfidResponse::invalidResponse();
         }
 

@@ -136,7 +136,6 @@ RfidResponse::RfidResponse(uint8_t * rxBuffer, size_t size): RfidPacket() {
     isValidPacket = true;
 
     if (size == 0) {
-        Log.errorln(F("RfidResponse: No data."));
         isValidPacket = false;
         return;
     }
