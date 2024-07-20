@@ -1,9 +1,14 @@
-#include <ArduinoUnitTests.h>
+#include <Arduino.h>
+#include <unity.h>
 #include "../src/packet.h"
+
+void setUp() {}
+
+void tearDown() {}
 
 uint8_t buffer[64];
 
-unittest(read_serial_number_packet_is_valid) {
+void test_read_serial_number_packet_is_valid() {
     size_t length;
     uint8_t readerId = 1;
 
@@ -14,11 +19,11 @@ unittest(read_serial_number_packet_is_valid) {
 
     length = request.toWire(buffer, 64);
 
-    assertEqual(expectedLength, length);
-    assertEqual(0, memcmp(buffer, expectedData, expectedLength));
+    TEST_ASSERT_EQUAL_UINT8(expectedLength, length);
+    TEST_ASSERT_EQUAL_UINT8(0, memcmp(buffer, expectedData, expectedLength));
 }
 
-unittest(read_serial_number_from_reader_2_packet_is_valid) {
+void test_read_serial_number_from_reader_2_packet_is_valid() {
     size_t length;
     uint8_t readerId = 2;
 
@@ -29,11 +34,11 @@ unittest(read_serial_number_from_reader_2_packet_is_valid) {
 
     length = request.toWire(buffer, 64);
 
-    assertEqual(expectedLength, length);
-    assertEqual(0, memcmp(buffer, expectedData, expectedLength));
+    TEST_ASSERT_EQUAL_UINT8(expectedLength, length);
+    TEST_ASSERT_EQUAL_UINT8(0, memcmp(buffer, expectedData, expectedLength));
 }
 
-unittest(set_reader_id_packet_is_valid) {
+void test_set_reader_id_packet_is_valid() {
     size_t length;
     uint8_t readerId = 1;
 
@@ -44,11 +49,11 @@ unittest(set_reader_id_packet_is_valid) {
 
     length = request.toWire(buffer, 64);
 
-    assertEqual(expectedLength, length);
-    assertEqual(0, memcmp(buffer, expectedData, expectedLength));
+    TEST_ASSERT_EQUAL_UINT8(expectedLength, length);
+    TEST_ASSERT_EQUAL_UINT8(0, memcmp(buffer, expectedData, expectedLength));
 }
 
-unittest(set_reader_id_for_reader_8_packet_is_valid) {
+void test_set_reader_id_for_reader_8_packet_is_valid() {
     size_t length;
     uint8_t readerId = 8;
 
@@ -59,11 +64,11 @@ unittest(set_reader_id_for_reader_8_packet_is_valid) {
 
     length = request.toWire(buffer, 64);
 
-    assertEqual(expectedLength, length);
-    assertEqual(0, memcmp(buffer, expectedData, expectedLength));
+    TEST_ASSERT_EQUAL_UINT8(expectedLength, length);
+    TEST_ASSERT_EQUAL_UINT8(0, memcmp(buffer, expectedData, expectedLength));
 }
 
-unittest(read_reader_id_packet_is_valid) {
+void test_read_reader_id_packet_is_valid() {
     size_t length;
     uint8_t readerId = 1; // Ignored
 
@@ -74,11 +79,11 @@ unittest(read_reader_id_packet_is_valid) {
 
     length = request.toWire(buffer, 64);
 
-    assertEqual(expectedLength, length);
-    assertEqual(0, memcmp(buffer, expectedData, expectedLength));
+    TEST_ASSERT_EQUAL_UINT8(expectedLength, length);
+    TEST_ASSERT_EQUAL_UINT8(0, memcmp(buffer, expectedData, expectedLength));
 }
 
-unittest(read_card_data_packet_is_valid) {
+void test_read_card_data_packet_is_valid() {
     size_t length;
     uint8_t readerId = 1;
 
@@ -89,11 +94,11 @@ unittest(read_card_data_packet_is_valid) {
 
     length = request.toWire(buffer, 64);
 
-    assertEqual(expectedLength, length);
-    assertEqual(0, memcmp(buffer, expectedData, expectedLength));
+    TEST_ASSERT_EQUAL_UINT8(expectedLength, length);
+    TEST_ASSERT_EQUAL_UINT8(0, memcmp(buffer, expectedData, expectedLength));
 }
 
-unittest(read_card_data_from_reader_4_packet_is_valid) {
+void test_read_card_data_from_reader_4_packet_is_valid() {
     size_t length;
     uint8_t readerId = 4;
 
@@ -104,11 +109,11 @@ unittest(read_card_data_from_reader_4_packet_is_valid) {
 
     length = request.toWire(buffer, 64);
 
-    assertEqual(expectedLength, length);
-    assertEqual(0, memcmp(buffer, expectedData, expectedLength));
+    TEST_ASSERT_EQUAL_UINT8(expectedLength, length);
+    TEST_ASSERT_EQUAL_UINT8(0, memcmp(buffer, expectedData, expectedLength));
 }
 
-unittest(re_read_card_data_packet_is_valid) {
+void test_re_read_card_data_packet_is_valid() {
     size_t length;
     uint8_t readerId = 1;
 
@@ -119,11 +124,11 @@ unittest(re_read_card_data_packet_is_valid) {
 
     length = request.toWire(buffer, 64);
 
-    assertEqual(expectedLength, length);
-    assertEqual(0, memcmp(buffer, expectedData, expectedLength));
+    TEST_ASSERT_EQUAL_UINT8(expectedLength, length);
+    TEST_ASSERT_EQUAL_UINT8(0, memcmp(buffer, expectedData, expectedLength));
 }
 
-unittest(reader_id_out_of_range_write_no_data) {
+void test_reader_id_out_of_range_write_no_data() {
     size_t length;
     uint8_t readerId = 10;
 
@@ -133,10 +138,10 @@ unittest(reader_id_out_of_range_write_no_data) {
 
     length = request.toWire(buffer, 64);
 
-    assertEqual(expectedLength, length);
+    TEST_ASSERT_EQUAL_UINT8(expectedLength, length);
 }
 
-unittest(target_buffer_too_small) {
+void test_target_buffer_too_small() {
     uint8_t smallBuffer[5];
     size_t length;
     uint8_t readerId = 1;
@@ -145,10 +150,10 @@ unittest(target_buffer_too_small) {
 
     length = request.toWire(smallBuffer, 5);
 
-    assertEqual(-1, length);
+    TEST_ASSERT_EQUAL_INT8(-1, length);
 }
 
-unittest(target_buffer_too_small_for_payload) {
+void test_target_buffer_too_small_for_payload() {
     uint8_t smallBuffer[9];
     size_t length;
     uint8_t readerId = 1; // Ignored
@@ -157,10 +162,10 @@ unittest(target_buffer_too_small_for_payload) {
 
     length = request.toWire(smallBuffer, 9);
 
-    assertEqual(-1, length);
+    TEST_ASSERT_EQUAL_INT8(-1, length);
 }
 
-unittest(read_reader_id_no_id_validation) {
+void test_read_reader_id_no_id_validation() {
     size_t length;
     uint8_t readerId = -1; // Ignored, out of range ID value
 
@@ -171,8 +176,25 @@ unittest(read_reader_id_no_id_validation) {
 
     length = request.toWire(buffer, 64);
 
-    assertEqual(expectedLength, length);
-    assertEqual(0, memcmp(buffer, expectedData, expectedLength));
+    TEST_ASSERT_EQUAL_UINT8(expectedLength, length);
+    TEST_ASSERT_EQUAL_UINT8(0, memcmp(buffer, expectedData, expectedLength));
 }
 
-unittest_main()
+void setup() {
+    UNITY_BEGIN();
+    RUN_TEST(test_read_serial_number_packet_is_valid);
+    RUN_TEST(test_read_serial_number_from_reader_2_packet_is_valid);
+    RUN_TEST(test_set_reader_id_packet_is_valid);
+    RUN_TEST(test_set_reader_id_for_reader_8_packet_is_valid);
+    RUN_TEST(test_read_reader_id_packet_is_valid);
+    RUN_TEST(test_read_card_data_packet_is_valid);
+    RUN_TEST(test_read_card_data_from_reader_4_packet_is_valid);
+    RUN_TEST(test_re_read_card_data_packet_is_valid);
+    RUN_TEST(test_reader_id_out_of_range_write_no_data);
+    RUN_TEST(test_target_buffer_too_small);
+    RUN_TEST(test_target_buffer_too_small_for_payload);
+    RUN_TEST(test_read_reader_id_no_id_validation);
+    UNITY_END();
+}
+
+void loop() {}
