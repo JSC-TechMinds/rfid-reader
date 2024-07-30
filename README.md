@@ -1,5 +1,6 @@
 # RFID reader
 [![Build](https://github.com/JSC-TechMinds/rfid-reader/actions/workflows/build.yml/badge.svg)](https://github.com/JSC-TechMinds/rfid-reader/actions/workflows/build.yml)
+[![Test](https://github.com/JSC-TechMinds/rfid-reader/actions/workflows/test.yml/badge.svg)](https://github.com/JSC-TechMinds/rfid-reader/actions/workflows/test.yml)
 [![Documentation](https://github.com/JSC-TechMinds/rfid-reader/actions/workflows/doxygen.yml/badge.svg)](https://github.com/JSC-TechMinds/rfid-reader/actions/workflows/doxygen.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache--2.0-green.svg)](https://github.com/JSC-TechMinds/rfid-reader/blob/main/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/JSC-TechMinds/rfid-reader.svg?maxAge=3600)](https://github.com/JSC-TechMinds/rfid-reader/releases)
