@@ -28,6 +28,6 @@ jobs:
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio
       - name: Build PlatformIO examples
-        run: pio ci --lib "." --project-conf=platformio.ini --environment=esp32dev
+        run: pio ci --project-conf=platformio.ini --environment=esp32dev
         env:
           PLATFORMIO_CI_SRC: ${{ matrix.example }}
